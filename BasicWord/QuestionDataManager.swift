@@ -21,6 +21,7 @@ class QuestionData {
     
     var userChoiceAnswer:String = "" //ユーザーが選択した答
     
+    
     init(questionSourceDataArray:[String]) {
         questionNo = questionSourceDataArray[0]    //問題番号
         question = questionSourceDataArray[1]      //問題文
@@ -53,10 +54,12 @@ class QuestionDataManeger {
     var questionDataArray = [QuestionData]()
     
     //現在の問題のインデックス
-    var nowQuestionIndex:Int = 0
+    var nowQuestionIndex:Int = 0  //現在の問題のインデックス
+    var correctCount:Int = 0      //ユーザーが正解した数
     //シングルトンであることを保証するため
     private init(){
     }
+    
 
     //問題の読み込み　QuestionDataManeger.sharedInstance.loadQuestion() ****
     func loadQuestion()  {
