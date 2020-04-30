@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCe-Ut-Wy1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -60,6 +60,9 @@
                                 <rect key="frame" x="157" y="507" width="72" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="START"/>
+                                <connections>
+                                    <segue destination="e0J-VL-fUi" kind="presentation" id="6m7-QJ-lNR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enI-V2-Szf">
                                 <rect key="frame" x="116" y="579" width="143" height="36"/>
@@ -100,14 +103,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptO-ze-7tB" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="112.89355322338831"/>
+            <point key="canvasLocation" x="129" y="100"/>
         </scene>
         <!--Question View Controller-->
         <scene sceneID="qMo-R3-iUK">
             <objects>
                 <viewController storyboardIdentifier="question" id="e0J-VL-fUi" customClass="QuestionViewController" customModule="ImpWords" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2mr-M8-Xu8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIS-qn-DHn">
@@ -117,11 +120,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1UQ-cp-U00">
-                                <rect key="frame" x="140.5" y="291" width="92" height="225"/>
+                                <rect key="frame" x="140.5" y="271" width="92" height="225"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUX-eD-Itz">
                                         <rect key="frame" x="0.0" y="0.0" width="92" height="41.5"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
@@ -131,6 +134,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdD-vK-QRR">
                                         <rect key="frame" x="0.0" y="61.5" width="92" height="41"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -139,6 +143,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="477-Xk-Ady">
                                         <rect key="frame" x="0.0" y="122.5" width="92" height="41.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -147,6 +152,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8s-il-dYj">
                                         <rect key="frame" x="0.0" y="184" width="92" height="41"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -156,13 +162,13 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="incorrect" translatesAutoresizingMaskIntoConstraints="NO" id="qS4-nr-YFj">
-                                <rect key="frame" x="86" y="306" width="201" height="195"/>
+                                <rect key="frame" x="86" y="286" width="201" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="Mkr-os-kvC"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-2O-rOO">
-                                <rect key="frame" x="86" y="373" width="201" height="128"/>
+                                <rect key="frame" x="86" y="353" width="201" height="128"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhF-YZ-pu5">
                                 <rect key="frame" x="310" y="195" width="31" height="30"/>
@@ -175,7 +181,7 @@
                                 <rect key="frame" x="63" y="61" width="254" height="2"/>
                             </progressView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="問題文です。当てはまる言葉を下の４つの中から選んで、クリックしてください。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0zi-TZ-CnS">
-                                <rect key="frame" x="16" y="71" width="343" height="136"/>
+                                <rect key="frame" x="16" y="71" width="343" height="116"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
@@ -188,7 +194,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Q9-rU-vcX">
-                                <rect key="frame" x="36" y="554" width="82" height="36"/>
+                                <rect key="frame" x="36" y="534" width="82" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="中断する"/>
                                 <connections>
