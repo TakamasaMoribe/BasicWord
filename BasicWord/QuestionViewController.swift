@@ -109,6 +109,13 @@ class QuestionViewController: UIViewController {
         {(Bool) in self.showCorrectAnswer() //正答を表示する
         }
     }
+   
+    //誤答の時には、正答を表示する
+    func showCorrectAnswer()  {
+        trueAnswer.isHidden = false//HIDDEN　解除
+        trueAnswer.text = "正解は:" + questionData.correctAnswer // 正答表示
+        nextQuestionButton.isHidden = false//HIDDENを解除してボタンを表示する
+    }
     
 
     func goNextQuestion()  {

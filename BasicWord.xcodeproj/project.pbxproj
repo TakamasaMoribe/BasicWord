@@ -18,6 +18,13 @@
 		7F5CD944245A8A9700056376 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5CD943245A8A9700056376 /* AudioToolbox.framework */; };
 		7F5CD946245A8AB700056376 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD945245A8AB700056376 /* QuestionViewController.swift */; };
 		7F5CD948245A933100056376 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD947245A933100056376 /* ResultViewController.swift */; };
+		7F5CD950245A97A400056376 /* １年動物.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD949245A97A300056376 /* １年動物.csv */; };
+		7F5CD951245A97A400056376 /* correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD94A245A97A300056376 /* correct@2x.png */; };
+		7F5CD952245A97A400056376 /* １年物理.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD94B245A97A300056376 /* １年物理.csv */; };
+		7F5CD953245A97A400056376 /* incorrect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD94C245A97A400056376 /* incorrect@2x.png */; };
+		7F5CD954245A97A400056376 /* １年地学.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD94D245A97A400056376 /* １年地学.csv */; };
+		7F5CD955245A97A400056376 /* １年化学.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD94E245A97A400056376 /* １年化学.csv */; };
+		7F5CD958245A97F100056376 /* １年植物.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD957245A97F100056376 /* １年植物.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +41,13 @@
 		7F5CD943245A8A9700056376 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7F5CD945245A8AB700056376 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		7F5CD947245A933100056376 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		7F5CD949245A97A300056376 /* １年動物.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "１年動物.csv"; sourceTree = "<group>"; };
+		7F5CD94A245A97A300056376 /* correct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "correct@2x.png"; sourceTree = "<group>"; };
+		7F5CD94B245A97A300056376 /* １年物理.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "１年物理.csv"; sourceTree = "<group>"; };
+		7F5CD94C245A97A400056376 /* incorrect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "incorrect@2x.png"; sourceTree = "<group>"; };
+		7F5CD94D245A97A400056376 /* １年地学.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "１年地学.csv"; sourceTree = "<group>"; };
+		7F5CD94E245A97A400056376 /* １年化学.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "１年化学.csv"; sourceTree = "<group>"; };
+		7F5CD957245A97F100056376 /* １年植物.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "１年植物.csv"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +91,13 @@
 				7F5CD947245A933100056376 /* ResultViewController.swift */,
 				7F5CD940245A4FA100056376 /* Singleton.swift */,
 				7F5CD931245A46F400056376 /* Assets.xcassets */,
+				7F5CD94E245A97A400056376 /* １年化学.csv */,
+				7F5CD957245A97F100056376 /* １年植物.csv */,
+				7F5CD94D245A97A400056376 /* １年地学.csv */,
+				7F5CD949245A97A300056376 /* １年動物.csv */,
+				7F5CD94B245A97A300056376 /* １年物理.csv */,
+				7F5CD94A245A97A300056376 /* correct@2x.png */,
+				7F5CD94C245A97A400056376 /* incorrect@2x.png */,
 				7F5CD933245A46F400056376 /* LaunchScreen.storyboard */,
 				7F5CD936245A46F400056376 /* Info.plist */,
 			);
@@ -150,8 +171,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F5CD935245A46F400056376 /* LaunchScreen.storyboard in Resources */,
+				7F5CD950245A97A400056376 /* １年動物.csv in Resources */,
+				7F5CD952245A97A400056376 /* １年物理.csv in Resources */,
+				7F5CD953245A97A400056376 /* incorrect@2x.png in Resources */,
+				7F5CD958245A97F100056376 /* １年植物.csv in Resources */,
 				7F5CD932245A46F400056376 /* Assets.xcassets in Resources */,
+				7F5CD954245A97A400056376 /* １年地学.csv in Resources */,
 				7F5CD930245A46EF00056376 /* Main.storyboard in Resources */,
+				7F5CD951245A97A400056376 /* correct@2x.png in Resources */,
+				7F5CD955245A97A400056376 /* １年化学.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
