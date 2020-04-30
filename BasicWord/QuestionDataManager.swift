@@ -42,3 +42,65 @@ class QuestionData {
 }
 // end of class QuestionData =============================================
 
+class QuestionDataManeger {
+        
+    var filename:String = ""  //問題ファイルの名前
+    
+    //シングルトン  sharedInstance = QuestionDataManeger() ******
+    static let sharedInstance = QuestionDataManeger()
+    
+    //問題を格納するための配列
+    var questionDataArray = [QuestionData]()
+    
+    //現在の問題のインデックス
+    var nowQuestionIndex:Int = 0
+    //シングルトンであることを保証するため
+    private init(){
+    }
+
+    //問題の読み込み　QuestionDataManeger.sharedInstance.loadQuestion() ****
+    func loadQuestion()  {
+        questionDataArray.removeAll() //古いデータ配列を消去しておく
+        nowQuestionIndex = 0          //インデックスも初期化
+        let singleton:Singleton = Singleton.sharedInstance//ファイル名用のシングルトン******
+        let filename = singleton.getItem() //ファイル名をシングルトンから読み込む
+        
+        //問題ファイルのパスを指定する　セクメンティッドコントロールから取得する
+        guard let csvFilePath = Bundle.main.path(forResource: filename, ofType: "csv") else {
+            print("ファイルが存在しません")//エラー処理が欲しい
+            
+            return
+        }
+        //問題ファイルからデータを読み込む
+        //クロージャ:関数の実行結果を次の処理で続けて使用する関数
+        //enumerateLinesは改行（\n (バックスラッシュ + n))単位で文字列を読み込むメソッド
+        //stopはそのままの意味でstop変数にtrueを代入した時にループが終了する
+        //lineやstopは決められた名前ではなく、自分の好きな名前を付けられる
+        do {
+            let csvStringData = try String(contentsOfFile: csvFilePath,encoding: String.Encoding.utf8)
+            csvStringData.enumerateLines(invoking: {(line,stop) in //改行されるごとに分割する
+                let questionSourceDataArray = line.components(separatedBy: ",") //１行を","で分割して配列に入れる
+                let questionData = QuestionData(questionSourceDataArray: questionSourceDataArray)//１行分の配列
+                self.questionDataArray.append(questionData) //格納用の配列に、１行ずつ追加していく
+                }) //invokingからのクロージャここまで
+            
+            }catch let error {
+                print("ファイル読み込みエラー:\(error)")
+                return
+        } //do節ここまで
+    //問題の出題順をシャッフルする　配列内で要素をシャッフルする
+    questionDataArray.shuffle() //これだけでOK
+    }
+
+    
+    //問題文の取り出し  QuestionDataManeger.sharedInstance.nextQuestion() ****
+    func nextQuestion() -> QuestionData? {
+        if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
+            let nextQuestion = questionDataArray[nowQuestionIndex]
+            nowQuestionIndex += 1 //次の問題へ
+            return nextQuestion
+        }
+        return nil
+    }
+ 
+}
