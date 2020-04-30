@@ -15,6 +15,9 @@
 		7F5CD93D245A474400056376 /* QuestionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD93C245A474400056376 /* QuestionDataManager.swift */; };
 		7F5CD93F245A4A0600056376 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD93E245A4A0600056376 /* StartViewController.swift */; };
 		7F5CD941245A4FA100056376 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD940245A4FA100056376 /* Singleton.swift */; };
+		7F5CD944245A8A9700056376 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F5CD943245A8A9700056376 /* AudioToolbox.framework */; };
+		7F5CD946245A8AB700056376 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD945245A8AB700056376 /* QuestionViewController.swift */; };
+		7F5CD948245A933100056376 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD947245A933100056376 /* ResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		7F5CD93C245A474400056376 /* QuestionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDataManager.swift; sourceTree = "<group>"; };
 		7F5CD93E245A4A0600056376 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7F5CD940245A4FA100056376 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		7F5CD943245A8A9700056376 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7F5CD945245A8AB700056376 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		7F5CD947245A933100056376 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F5CD944245A8A9700056376 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +53,7 @@
 			children = (
 				7F5CD927245A46EF00056376 /* BasicWord */,
 				7F5CD926245A46EF00056376 /* Products */,
+				7F5CD942245A8A9700056376 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,12 +73,22 @@
 				7F5CD93E245A4A0600056376 /* StartViewController.swift */,
 				7F5CD92E245A46EF00056376 /* Main.storyboard */,
 				7F5CD93C245A474400056376 /* QuestionDataManager.swift */,
+				7F5CD945245A8AB700056376 /* QuestionViewController.swift */,
+				7F5CD947245A933100056376 /* ResultViewController.swift */,
 				7F5CD940245A4FA100056376 /* Singleton.swift */,
 				7F5CD931245A46F400056376 /* Assets.xcassets */,
 				7F5CD933245A46F400056376 /* LaunchScreen.storyboard */,
 				7F5CD936245A46F400056376 /* Info.plist */,
 			);
 			path = BasicWord;
+			sourceTree = "<group>";
+		};
+		7F5CD942245A8A9700056376 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F5CD943245A8A9700056376 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +164,8 @@
 			files = (
 				7F5CD93F245A4A0600056376 /* StartViewController.swift in Sources */,
 				7F5CD93D245A474400056376 /* QuestionDataManager.swift in Sources */,
+				7F5CD948245A933100056376 /* ResultViewController.swift in Sources */,
+				7F5CD946245A8AB700056376 /* QuestionViewController.swift in Sources */,
 				7F5CD929245A46EF00056376 /* AppDelegate.swift in Sources */,
 				7F5CD941245A4FA100056376 /* Singleton.swift in Sources */,
 				7F5CD92B245A46EF00056376 /* SceneDelegate.swift in Sources */,

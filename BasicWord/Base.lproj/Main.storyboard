@@ -10,7 +10,7 @@
         <!--Start View Controller-->
         <scene sceneID="i9r-IC-OuQ">
             <objects>
-                <viewController storyboardIdentifier="start" id="kCe-Ut-Wy1" customClass="StartViewController" customModule="ImpWords" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="start" id="kCe-Ut-Wy1" customClass="StartViewController" customModule="BasicWord" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ie2-Qi-HrM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -108,7 +108,7 @@
         <!--Question View Controller-->
         <scene sceneID="qMo-R3-iUK">
             <objects>
-                <viewController storyboardIdentifier="question" id="e0J-VL-fUi" customClass="QuestionViewController" customModule="ImpWords" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="question" id="e0J-VL-fUi" customClass="QuestionViewController" customModule="BasicWord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2mr-M8-Xu8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,7 +257,7 @@
         <!--Result View Controller-->
         <scene sceneID="zaY-Ij-gco">
             <objects>
-                <viewController storyboardIdentifier="result" id="BcJ-Wl-XcG" customClass="ResultViewController" customModule="ImpWords" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="result" id="BcJ-Wl-XcG" customClass="ResultViewController" customModule="BasicWord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Dd-f9-Eko">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,7 +321,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLT-XX-AJp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="F97-J9-76U" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1573" y="102"/>
+            <point key="canvasLocation" x="1583" y="100"/>
         </scene>
     </scenes>
     <resources>
