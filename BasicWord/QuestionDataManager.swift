@@ -100,8 +100,17 @@ class QuestionDataManeger {
                 print("ファイル読み込みエラー:\(error)")
                 return
             } //do節ここまで
-        //問題の出題順をシャッフルする　配列内で要素をシャッフルする
-        questionDataArray.shuffle() //これだけでOK
+    //問題の出題順をシャッフルする　配列内で要素をシャッフルする
+    questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
+        
+    //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
+    let totalNumberOfQuestions = questionDataArray.count //問題の総数
+        for i in 0..<totalNumberOfQuestions {
+            questionDataArray[i].questionNo = i + 1 //０から始まるので+1
+            print(questionDataArray[i].originNo,questionDataArray[i].question,questionDataArray[i].questionNo)
+        }
+
+        
     }
   // end of func loadQuestion() -----------------------------------------
     

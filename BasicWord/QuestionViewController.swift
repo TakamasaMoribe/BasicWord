@@ -40,12 +40,12 @@ class QuestionViewController: UIViewController {
             let defaults = UserDefaults.standard      //UserDefaultsを参照する
             let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
             
-                if  questionCount == 0 {
-                    questionCount = qCount //問題の総数。途中で保存して再開した場合に、この値を使う
-                }
+//                if  questionCount == 0 {
+//                    questionCount = qCount //問題の総数。途中で保存して再開した場合に、この値を使う
+//                }
             
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
-            questionNoLabel.text = "Q.\(questionNo)" + "/\(questionCount)"//　出題順/問題数合計
+            questionNoLabel.text = "Q.\(questionData.questionNo)" + "/\(questionCount)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
             answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
             answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)

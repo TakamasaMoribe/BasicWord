@@ -124,7 +124,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUX-eD-Itz">
                                         <rect key="frame" x="0.0" y="0.0" width="92" height="41.5"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.31148217429577463" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Button"/>
@@ -134,7 +134,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdD-vK-QRR">
                                         <rect key="frame" x="0.0" y="61.5" width="92" height="41"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.31148217429577463" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -143,7 +143,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="477-Xk-Ady">
                                         <rect key="frame" x="0.0" y="122.5" width="92" height="41.5"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.31148217429577463" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -152,7 +152,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8s-il-dYj">
                                         <rect key="frame" x="0.0" y="184" width="92" height="41"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19743067781690141" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="0.31148217429577463" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -168,7 +168,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-2O-rOO">
-                                <rect key="frame" x="86" y="353" width="201" height="128"/>
+                                <rect key="frame" x="86" y="279" width="201" height="202"/>
                             </imageView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhF-YZ-pu5">
                                 <rect key="frame" x="310" y="195" width="31" height="30"/>
@@ -252,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTH-co-rPY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893.60000000000002" y="100.29985007496252"/>
+            <point key="canvasLocation" x="900" y="99"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="zaY-Ij-gco">
@@ -325,7 +325,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="correct" width="128" height="128"/>
-        <image name="incorrect" width="128" height="128"/>
+        <image name="correct" width="202" height="202"/>
+        <image name="incorrect" width="201" height="201"/>
     </resources>
 </document>
