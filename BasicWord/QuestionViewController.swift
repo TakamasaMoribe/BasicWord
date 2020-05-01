@@ -36,7 +36,7 @@ class QuestionViewController: UIViewController {
             
             //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
             let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
-            let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か
+ //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
             let defaults = UserDefaults.standard      //UserDefaultsを参照する
             let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
             
@@ -55,7 +55,7 @@ class QuestionViewController: UIViewController {
         
             //解答の進行状況を表示する
                 var degree:Float = 0.0 //進み具合
-                degree = Float(questionNo) / Float(totalNumberOfQuestions)
+                degree = Float(questionData.questionNo) / Float(totalNumberOfQuestions)
                 progressView.progress = degree //progressView を動かす
             
         }

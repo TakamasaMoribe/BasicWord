@@ -107,7 +107,6 @@ class QuestionDataManeger {
     let totalNumberOfQuestions = questionDataArray.count //問題の総数
         for i in 0..<totalNumberOfQuestions {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
-            print(questionDataArray[i].originNo,questionDataArray[i].question,questionDataArray[i].questionNo)
         }
 
         
