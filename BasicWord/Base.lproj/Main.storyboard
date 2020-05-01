@@ -290,16 +290,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="タイトルへ戻る"/>
                                 <connections>
-                                    <segue destination="F97-J9-76U" kind="unwind" unwindAction="goToTitle:" id="QdC-kA-fye"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-Ej-V7a">
-                                <rect key="frame" x="118" y="406" width="143" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="出題画面に戻る"/>
-                                <connections>
-                                    <action selector="clickNextQuestionButton:" destination="BcJ-Wl-XcG" eventType="touchUpInside" id="DVQ-ER-HgT"/>
+                                    <segue destination="F97-J9-76U" kind="unwind" unwindAction="goToTitle:" id="Kjt-3K-zhB"/>
                                 </connections>
                             </button>
                         </subviews>

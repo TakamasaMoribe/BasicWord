@@ -13,7 +13,7 @@ class QuestionViewController: UIViewController {
     
         var filename:String = ""       //問題データのCSVファイル名本体部分
         var questionData:QuestionData! //前画面より受け取るデータ
-        var questionCount:Int = 0      //問題の総数
+        var totalNumberOfQuestions:Int = 0      //問題の総数
         
         @IBOutlet weak var progressView: UIProgressView! //解答の進行状況
         
@@ -35,17 +35,17 @@ class QuestionViewController: UIViewController {
             super.viewDidLoad()
             
             //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
-            var questionCount = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
+            let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
             let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か
             let defaults = UserDefaults.standard      //UserDefaultsを参照する
             let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
             
-//                if  questionCount == 0 {
-//                    questionCount = qCount //問題の総数。途中で保存して再開した場合に、この値を使う
+//                if  totalNumberOfQuestions == 0 {
+//                    totalNumberOfQuestions = qCount //問題の総数。途中で保存して再開した場合に、この値を使う
 //                }
             
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
-            questionNoLabel.text = "Q.\(questionData.questionNo)" + "/\(questionCount)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
+            questionNoLabel.text = "Q.\(questionData.questionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
             answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
             answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)
@@ -55,7 +55,7 @@ class QuestionViewController: UIViewController {
         
             //解答の進行状況を表示する
                 var degree:Float = 0.0 //進み具合
-                degree = Float(questionNo) / Float(questionCount)
+                degree = Float(questionNo) / Float(totalNumberOfQuestions)
                 progressView.progress = degree //progressView を動かす
             
         }

@@ -17,7 +17,7 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
 
         //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray *******
-        let questionCount = QuestionDataManeger.sharedInstance.questionDataArray.count
+        let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count
         
         //正解数の取得
         var correctCount:Int = 0
@@ -30,7 +30,7 @@ class ResultViewController: UIViewController {
         }
         
         //正解率の計算
-        let correctPercent:Float = (Float(correctCount)/Float(questionCount)) * 100
+        let correctPercent:Float = (Float(correctCount)/Float(totalNumberOfQuestions)) * 100
  
         //小数第一位まで計算して表示
         correctPercentLabel.text = String(format: "%.1f", correctPercent) + "%"

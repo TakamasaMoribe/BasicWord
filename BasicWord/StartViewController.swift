@@ -83,12 +83,12 @@ class StartViewController: UIViewController {
 //             } //Do節ここまで
 //
 //            //UserDefaultsStandardを使って、データを読み書きする
-//             let questionCount = questionDataArray.count//問題の総数
-//    print("questionCount:\(questionCount)")
+//             let totalNumberOfQuestions = questionDataArray.count//問題の総数
+//    print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
 //    print("questionData:\(QuestionDataManeger.sharedInstance.questionDataArray[1].correctAnswer)")
 //             let defaults = UserDefaults.standard      //UserDefaultsを参照する
 //             let listNo = defaults.integer(forKey: "listNo")//問題の進み具合を読み込む
-//             defaults.set(questionCount, forKey: "qCount") //問題の総数を"qCount"として保存する
+//             defaults.set(totalNumberOfQuestions, forKey: "qCount") //問題の総数を"qCount"として保存する
 //
 //
 //            //次の問題文を表示する
@@ -101,7 +101,7 @@ class StartViewController: UIViewController {
 //            //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
 //            //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
 //            if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
-//                nextQuestionViewController.questionCount = questionCount //問題の総数を、問題データに設定する
+//                nextQuestionViewController.totalNumberOfQuestions = totalNumberOfQuestions //問題の総数を、問題データに設定する
 //     //           nextQuestionViewController.questionData = nextQuestion//次の問題を、問題データに設定する
 //                nextQuestionViewController.questionData = nextQuestion//次の問題を、問題データに設定する
 //
