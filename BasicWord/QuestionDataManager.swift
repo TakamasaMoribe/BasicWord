@@ -21,9 +21,9 @@ class QuestionData {
     var answer4:String        //選択肢４
     
     //プログラム実行中に取得するデータ
-    var userChoiceAnswer:String? // = "" //ユーザーが選択した答
-    var questionNo:Int = 0           //問題の番号
-    var correctCount:Int = 0      //ユーザーが正解した数???????????
+    var userChoiceAnswer:String?  //ユーザーが選択した答
+    var questionNo:Int = 0        //現在の問題の番号？？？？？
+    var correctCount:Int = 0      //ユーザーが正解した数
     
     //イニシャライザー　配列questionSourceDataArrayを受け取ることができる
     init(questionSourceDataArray:[String]) {
@@ -60,7 +60,7 @@ class QuestionDataManeger {
     var questionDataArray = [QuestionData]()
     
     //現在の問題のインデックス
-    var nowQuestionIndex:Int = 0  //問題文配列のインデックス
+    var nowQuestionIndex:Int = 0//問題文配列のインデックス
 
     //シングルトンであることを保証するために初期化する
     private init(){
@@ -112,6 +112,7 @@ class QuestionDataManeger {
         
     }
   // end of func loadQuestion() -----------------------------------------
+
     
     //問題文の取り出し  QuestionDataManeger.sharedInstance.nextQuestion() ****
     

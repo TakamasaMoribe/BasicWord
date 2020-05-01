@@ -150,7 +150,8 @@ class QuestionViewController: UIViewController {
 
     //中断する　ボタンを押した時　？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
     @IBAction func clickStopButton(_ sender: UIButton) {
-        
+
+       //問題の保存
        //問題の取得  QuestionDataManeger.sharedInstance.questionDataArray****
         let listArray = QuestionDataManeger.sharedInstance.questionDataArray
         let questionCount = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
@@ -188,7 +189,17 @@ print(csvString)
                     correctCount += 1
                 }
             }
-print(correctCount)
+        //正解数の保存
+        let tempSaveArray: QuestionData = questionData //一時保存用のデータ
+        tempSaveArray.correctCount = correctCount      //ユーザーの正解数をプロパティに保存
+        //再開するときの問題順
+        let nowQuestionNo = questionData.questionNo
+        tempSaveArray.questionNo = nowQuestionNo      //現在の問題順をプロパティに保存
+        
+print("questionData.questionNo:\(questionData.questionNo)")
+print("出題順:\(tempSaveArray.questionNo)")
+print("tempSaveArray.correctCount:\(tempSaveArray.correctCount)")
+print("正解数:\(correctCount)")
         //ユーザーデフォルトを参照する。問題順、問題の総数を保存
             let listNo = Singleton.sharedInstance.getNumber()    //今は何問目か
             let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
