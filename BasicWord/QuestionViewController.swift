@@ -53,7 +53,7 @@ class QuestionViewController: UIViewController {
             answer4Button.setTitle(questionData.answer4, for: UIControl.State.normal)
             trueAnswer.text = questionData.correctAnswer //正答
         
-            //解答の進行状況を表示する
+            //解答の進行状況を表示する プログレスビューの表示
                 var degree:Float = 0.0 //進み具合
                 degree = Float(questionData.questionNo) / Float(totalNumberOfQuestions)
                 progressView.progress = degree //progressView を動かす
@@ -115,9 +115,15 @@ class QuestionViewController: UIViewController {
         trueAnswer.isHidden = false//HIDDEN　解除
         trueAnswer.text = "正解は:" + questionData.correctAnswer // 正答表示
         nextQuestionButton.isHidden = false//HIDDENを解除してボタンを表示する
+        //"次へ"ボタンのクリックで、goNextQuestion() //次の問題へ進む
+    }
+
+    //"次へ"ボタンのクリック
+    @IBAction func tapNextButton(_ sender: UIButton) {
+        goNextQuestion() //次の問題へ進む
     }
     
-
+    
     func goNextQuestion()  {
     //問題文の取り出し  QuestionDataManeger.sharedInstance.nextQuestion ****
     //変数の点検 ここから次の問題へ nowQuestionIndex:0 questionDataArray.count:0 になっている

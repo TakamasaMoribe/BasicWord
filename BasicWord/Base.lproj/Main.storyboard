@@ -174,7 +174,7 @@
                                 <rect key="frame" x="310" y="195" width="31" height="30"/>
                                 <state key="normal" title="次へ"/>
                                 <connections>
-                                    <action selector="tapNextButton:" destination="e0J-VL-fUi" eventType="touchUpInside" id="sTV-AE-mzI"/>
+                                    <action selector="tapNextButton:" destination="e0J-VL-fUi" eventType="touchUpInside" id="CeR-4B-xek"/>
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ED9-ZJ-cgY">
@@ -243,7 +243,7 @@
                         <outlet property="answer4Button" destination="X8s-il-dYj" id="iip-Xl-I6f"/>
                         <outlet property="correctImageView" destination="hoI-2O-rOO" id="Y44-KG-WdI"/>
                         <outlet property="incorrectImageView" destination="qS4-nr-YFj" id="1rj-P7-ChA"/>
-                        <outlet property="nextQuestionButton" destination="jhF-YZ-pu5" id="akI-j5-KzH"/>
+                        <outlet property="nextQuestionButton" destination="jhF-YZ-pu5" id="2sB-xK-SYo"/>
                         <outlet property="progressView" destination="ED9-ZJ-cgY" id="FEI-dM-YzE"/>
                         <outlet property="questionNoLabel" destination="zIS-qn-DHn" id="r2o-uN-et9"/>
                         <outlet property="questionTextView" destination="0zi-TZ-CnS" id="uqJ-bJ-xKG"/>
