@@ -146,7 +146,51 @@ class QuestionViewController: UIViewController {
                 //StoryboardのSegueを利用しない明示的な画面遷移処理
                 present(nextQuestionViewController,animated: true,completion: nil)
             }
-        }
+    }
 
+    //中断する　ボタンを押した時　？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+    @IBAction func clickStopButton(_ sender: UIButton) {
+    }
+    
+
+       //問題の取得  QuestionDataManeger.sharedInstance.questionDataArray****
+            let listArray = QuestionDataManeger.sharedInstance.questionDataArray
+            let questionCount = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
+            
+        //配列をCSVファイルに変換する
+            var csvString = ""
+            var item = ""
+            for i in 0 ... questionCount - 1{
+                item = listArray[i].questionNo + "," + listArray[i].question + "," + listArray[i].correctAnswer + "," + listArray[i].answer1 + "," + listArray[i].answer2 + "," + listArray[i].answer3  + "," + listArray[i].answer4 + "\n" //改行
+                    csvString += item
+            }
+            
+            //問題の保存 csvファイルとして保存する
+            let thePath = NSHomeDirectory()+"/Documents/myTextfile.csv"
+            let textData = csvString
+            do {
+                try textData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+            }catch let error as NSError {
+                print("保存に失敗。\n \(error)")
+            }
+
+            
+            //正解数の取得
+            var correctCount:Int = 0
+            //正解数を計算する  QuestionDataManeger.sharedInstance.questionDataArray ******
+                for questionData in QuestionDataManeger.sharedInstance.questionDataArray {
+                    if questionData.isCorrect() {
+                        correctCount += 1
+                    }
+                }
+    print(correctCount)
+        //ユーザーデフォルトを参照する。問題順、問題の総数を保存
+            let listNo = Singleton.sharedInstance.getNumber()    //今は何問目か
+            let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
+            defaults.set(listNo, forKey: "listNo")               //再開する問題の順を"listNo"として保存する
+            defaults.set(questionCount, forKey: "questionCount") //問題の総数を"questionCount"として保存する
+            defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
+
+    
     
 }

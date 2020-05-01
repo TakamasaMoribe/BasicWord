@@ -198,7 +198,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="中断する"/>
                                 <connections>
-                                    <action selector="clickStopButton:" destination="e0J-VL-fUi" eventType="touchUpInside" id="oYa-9H-LCB"/>
+                                    <action selector="clickStopButton:" destination="e0J-VL-fUi" eventType="touchUpInside" id="la5-Jc-hVe"/>
                                 </connections>
                             </button>
                         </subviews>
