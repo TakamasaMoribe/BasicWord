@@ -21,9 +21,10 @@ class QuestionData {
     var answer4:String        //選択肢４
     
     //プログラム実行中に取得するデータ
-    var userChoiceAnswer:String?  //ユーザーが選択した答
-    var questionNo:Int = 0        //現在の問題の番号？？？？？
-    var correctCount:Int = 0      //ユーザーが正解した数
+    var userChoiceAnswer:String?       //ユーザーが選択した答
+    var questionCount:Int = 0          //総問題数？？？？？
+    var questionNo:Int = 0             //現在の問題の番号？？？？？
+    var correctCount:Int = 0           //ユーザーが正解した数
     
     //イニシャライザー　配列questionSourceDataArrayを受け取ることができる
     init(questionSourceDataArray:[String]) {
@@ -95,11 +96,14 @@ class QuestionDataManeger {
                 //問題番号を設定 =questionDataArrayに追加した順番を表す
                 questionData.questionNo = self.questionDataArray.count
                 }) //invokingからのクロージャここまで
+
             
             }catch let error {
                 print("ファイル読み込みエラー:\(error)")
                 return
             } //do節ここまで
+
+        
     //問題の出題順をシャッフルする　配列内で要素をシャッフルする
     questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
         
@@ -108,6 +112,9 @@ class QuestionDataManeger {
         for i in 0..<totalNumberOfQuestions {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
         }
+    singleton.saveNumber(number: totalNumberOfQuestions) //問題の総数をシングルトンに保存しておく
+//        QuestionData.questionCount = totalNumberOfQuestions
+
 
         
     }

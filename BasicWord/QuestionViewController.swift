@@ -11,6 +11,9 @@ import AudioToolbox
 
 class QuestionViewController: UIViewController {
     
+    let singleton:Singleton = Singleton.sharedInstance
+    
+    
         var filename:String = ""       //問題データのCSVファイル名本体部分
         var questionData:QuestionData! //前画面より受け取るデータ
         var totalNumberOfQuestions:Int = 0      //問題の総数
@@ -37,8 +40,8 @@ class QuestionViewController: UIViewController {
             //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
             let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
  //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
-            let defaults = UserDefaults.standard      //UserDefaultsを参照する
-            let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
+ //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
+ //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
             
 //                if  totalNumberOfQuestions == 0 {
 //                    totalNumberOfQuestions = qCount //問題の総数。途中で保存して再開した場合に、この値を使う
@@ -191,15 +194,19 @@ print(csvString)
             }
         //正解数の保存
         let tempSaveArray: QuestionData = questionData //一時保存用のデータ
-        tempSaveArray.correctCount = correctCount      //ユーザーの正解数をプロパティに保存
+        tempSaveArray.correctCount = correctCount      //ユーザーの正解数をプロパティcorrectCountに保存
         //再開するときの問題順
         let nowQuestionNo = questionData.questionNo
-        tempSaveArray.questionNo = nowQuestionNo      //現在の問題順をプロパティに保存
+        tempSaveArray.questionNo = nowQuestionNo      //現在の問題順をプロパティquestionNoに保存
+        //総問題数
         
-print("questionData.questionNo:\(questionData.questionNo)")
-print("出題順:\(tempSaveArray.questionNo)")
-print("tempSaveArray.correctCount:\(tempSaveArray.correctCount)")
 print("正解数:\(correctCount)")
+print("questionData.correctCount:\(questionData.correctCount)")
+print("出題順:\(tempSaveArray.questionNo)")
+print("tempSaveArray.questionNo:\(tempSaveArray.questionNo)")
+print("総問題数:\(singleton.getNumber())")
+print("singleton.getNumber():\(singleton.getNumber())")
+
         //ユーザーデフォルトを参照する。問題順、問題の総数を保存
             let listNo = Singleton.sharedInstance.getNumber()    //今は何問目か
             let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
