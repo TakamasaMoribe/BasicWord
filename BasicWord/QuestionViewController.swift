@@ -150,8 +150,8 @@ class QuestionViewController: UIViewController {
                 present(nextQuestionViewController,animated: true,completion: nil)
             }
     }
-
-    //中断する　ボタンを押した時　？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+    //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //中断する　ボタンを押した時　？？？？？？
     @IBAction func clickStopButton(_ sender: UIButton) {
 
        //問題の保存
@@ -173,10 +173,10 @@ class QuestionViewController: UIViewController {
                 item = item + listArray[i].answer4 + "\n" //改行
                 csvString += item
             }
-print(csvString)
+//print(csvString)
 
         //問題の保存 csvファイルとして保存する
-        let thePath = NSHomeDirectory()+"/Documents/myTextfile.csv"
+        let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
         let textData = csvString
             do {
                 try textData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
@@ -195,26 +195,24 @@ print(csvString)
         //正解数の保存
         let tempSaveArray: QuestionData = questionData //一時保存用のデータ
         tempSaveArray.correctCount = correctCount      //ユーザーの正解数をプロパティcorrectCountに保存
-        //再開するときの問題順
+        //再起動することに備えて、ユーザーデフォルトスタンダードにする
+        //再開するときの出題順の保存
         let nowQuestionNo = questionData.questionNo
         tempSaveArray.questionNo = nowQuestionNo      //現在の問題順をプロパティquestionNoに保存
+        //ユーザーデフォルトスタンダードにする
         //総問題数
+        //singleton.getNumber()で取り出す
         
-print("正解数:\(correctCount)")
-print("questionData.correctCount:\(questionData.correctCount)")
-print("出題順:\(tempSaveArray.questionNo)")
-print("tempSaveArray.questionNo:\(tempSaveArray.questionNo)")
-print("総問題数:\(singleton.getNumber())")
-print("singleton.getNumber():\(singleton.getNumber())")
+print("正解数:questionData.correctCount:\(correctCount)")
+print("出題順:tempSaveArray.questionNo:\(tempSaveArray.questionNo)")
+print("総問題数:singleton.getNumber():\(singleton.getNumber())")
 
         
-//スタート画面に戻る　StartViewControllerへ ？？？？？？？？？？？？？？？？？？？？
-        //問題文に残りがあり、次の問題文を表示する時
-        //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
+//スタート画面に戻る　StartViewControllerへ
+
+        //StoryboardのIdentifierに設定した値("start")を使って、ViewControllerを生成する
         //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "start") as? StartViewController {
-//            nextQuestionViewController.questionData = nextQuestion
-            //StoryboardのSegueを利用しない明示的な画面遷移処理
             present(nextQuestionViewController,animated: true,completion: nil)
         }
         
