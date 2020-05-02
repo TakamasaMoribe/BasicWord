@@ -207,12 +207,24 @@ print("tempSaveArray.questionNo:\(tempSaveArray.questionNo)")
 print("総問題数:\(singleton.getNumber())")
 print("singleton.getNumber():\(singleton.getNumber())")
 
-        //ユーザーデフォルトを参照する。問題順、問題の総数を保存
-            let listNo = Singleton.sharedInstance.getNumber()    //今は何問目か
-            let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
-            defaults.set(listNo, forKey: "listNo")               //再開する問題の順を"listNo"として保存する
-            defaults.set(questionCount, forKey: "questionCount") //問題の総数を"questionCount"として保存する
-            defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
+        
+//スタート画面に戻る　StartViewControllerへ ？？？？？？？？？？？？？？？？？？？？
+        //問題文に残りがあり、次の問題文を表示する時
+        //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
+        //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
+        if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "start") as? StartViewController {
+//            nextQuestionViewController.questionData = nextQuestion
+            //StoryboardのSegueを利用しない明示的な画面遷移処理
+            present(nextQuestionViewController,animated: true,completion: nil)
+        }
+        
+
+//        //ユーザーデフォルトを参照する。問題順、問題の総数を保存
+//            let listNo = Singleton.sharedInstance.getNumber()    //今は何問目か
+//            let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
+//            defaults.set(listNo, forKey: "listNo")               //再開する問題の順を"listNo"として保存する
+//            defaults.set(questionCount, forKey: "questionCount") //問題の総数を"questionCount"として保存する
+//            defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
 
     }
     
