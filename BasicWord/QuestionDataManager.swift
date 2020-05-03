@@ -112,9 +112,15 @@ class QuestionDataManeger {
         for i in 0..<totalNumberOfQuestions {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
         }
-    singleton.saveNumber(number: totalNumberOfQuestions) //問題の総数をシングルトンに保存しておく
-//        QuestionData.questionCount = totalNumberOfQuestions
-
+        
+    //ユーザーデフォルトに変数を保存する。（問題の総数、正解数、問題順、の３つ）
+    //    再起動の可能性があるので、singletonは使用しない。
+    //ここでは、問題の総数questionDataArray.countを"correctCount"として保存する
+        let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
+        defaults.set(questionDataArray.count, forKey: "questionCount") //問題の総数を"questionCount"として保存する
+        
+        //defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
+        //defaults.set(listNo, forKey: "listNo")             //再開する問題の順を"listNo"として保存する
 
         
     }
