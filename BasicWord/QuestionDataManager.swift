@@ -119,8 +119,8 @@ class QuestionDataManeger {
         let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
         defaults.set(questionDataArray.count, forKey: "questionCount") //問題の総数を"questionCount"として保存する
         
-        //defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
-        //defaults.set(listNo, forKey: "listNo")             //再開する問題の順を"listNo"として保存する
+        //defaults.set(correctCount, forKey: "correctCount") //正解数QuestionViewControllerで
+        //defaults.set(listNo, forKey: "listNo")             //問題の順QuestionViewControllerで
 
         
     }
