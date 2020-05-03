@@ -193,27 +193,17 @@ class QuestionViewController: UIViewController {
                 }
             }
         
-        //正解数の保存・・・・・？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？いらない
-        let tempSaveArray: QuestionData = questionData //一時保存用のデータ
-        tempSaveArray.correctCount = correctCount      //ユーザーの正解数をプロパティcorrectCountに保存
-        //再起動することに備えて、ユーザーデフォルトスタンダードにする
-        //再開するときの出題順の保存
-        let nowQuestionNo = questionData.questionNo
-        tempSaveArray.questionNo = nowQuestionNo      //現在の問題順をプロパティquestionNoに保存
-
-
         
-//ユーザーデフォルトを参照する。正解数、問題順、を保存　　問題の総数は、ファイル読込の段階で行う
+//ユーザーデフォルトを参照する。正解数、出題順、を保存　　問題の総数は、ファイル読込の段階で行う
         //QuestionDataManager.loadQuestion()で
  
         let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
         defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
-        defaults.set(nowQuestionNo, forKey: "nowQuestionNo")//問題の順を"nowQuestionNo"として保存する
-
+        defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
         
 //UserDefaultsStandardに保存した値の確認
 print("正解数:defaults.correctCount:\(correctCount)")
-print("出題順:defaults.nowQuestionNo:\(nowQuestionNo)")
+print("次出題順:defaults.nowQuestionNo:\(questionData.questionNo)")
 print("総問題数:defaults.questionCount:\(questionCount)")
         
         

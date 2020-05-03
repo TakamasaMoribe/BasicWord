@@ -62,6 +62,7 @@ class StartViewController: UIViewController {
 //        // 再開ボタンを押した時 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
          @IBAction func clickRetryButton(_ sender: Any) {
 print("再開ボタン押下")
+            
             //問題を格納するための配列
             var questionDataArray = [QuestionData]() //QuestionDataの型
 
@@ -76,21 +77,28 @@ print("再開ボタン押下")
                     QuestionDataManeger.sharedInstance.questionDataArray.append(questionData) //格納用の配列に、１行ずつ追加していく
 
                     }) //invokingからのクロージャここまで
-print("questionDataArray[1]:\(QuestionDataManeger.sharedInstance.questionDataArray[1].question)")//OK
-print("questionDataArray.count:\(QuestionDataManeger.sharedInstance.questionDataArray.count)") //問題の総数
+//print("questionDataArray[1]:\(QuestionDataManeger.sharedInstance.questionDataArray[1].question)")//OK
+//print("questionDataArray.count:\(QuestionDataManeger.sharedInstance.questionDataArray.count)") //問題の総数
                 
              }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
              } //Do節ここまで
             
-    let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count //問題の総数
-    singleton.saveNumber(number: totalNumberOfQuestions) //問題の総数をシングルトンに保存しておく？？？？
-    //        //UserDefaultsStandardを使って、データを読み書きする
-    // let totalNumberOfQuestions = singleton.getNumber() //シングルトンから問題の総数を取り出す
+//    let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count //問題の総数
+//    singleton.saveNumber(number: totalNumberOfQuestions) //問題の総数をシングルトンに保存しておく？？？？
+//    //        //UserDefaultsStandardを使って、データを読み書きする
+//    // let totalNumberOfQuestions = singleton.getNumber() //シングルトンから問題の総数を取り出す
+
+let defaults = UserDefaults.standard      //UserDefaultsを参照する
+let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
+let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
+let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
+                        
+print("restart正解数:correctCount:\(correctCount)")
+print("restart出題順:questionNo:\(nowQuestionNo)")
+print("restart総問題数:questionCount:\(questionCount)")
             
-    print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
-    print("questionData:\(QuestionDataManeger.sharedInstance.questionDataArray[1].correctAnswer)")
-    print("問題の進み具合は、")
+            
 //             let defaults = UserDefaults.standard      //UserDefaultsを参照する
 //             let listNo = defaults.integer(forKey: "listNo")//問題の進み具合を読み込む
 //             defaults.set(totalNumberOfQuestions, forKey: "qCount") //問題の総数を"qCount"として保存する
