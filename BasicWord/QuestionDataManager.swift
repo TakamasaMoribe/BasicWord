@@ -113,7 +113,8 @@ class QuestionDataManeger {
 //            let totalNumberOfQuestions = questionDataArray.count //問題の総数
             for i in 0..<questionDataArray.count {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
-                print("questionNo\(questionDataArray[i].questionNo)")
+print("questionNo:\(questionDataArray[i].questionNo)")
+print("questionNo:\(questionDataArray[i].correctAnswer)")
         }
         
     //ユーザーデフォルトに変数を保存する。（問題の総数、正解数、問題順、の３つ）

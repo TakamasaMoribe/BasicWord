@@ -23,7 +23,23 @@ class StartViewController: UIViewController {
         
     //次画面に移る前の処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
+        
+        //userDefaultStandardに保存しておいた値をクリアする。
+        //再開のために、中断時に保存しておいた値（問題の総数、正解数、問題の番号）
+        let questionCount = 0 //問題の総数
+        let correctCount = 0  //正解数
+        let nowQuestionNo = 1 //現在出題している問題の番号
+        
+        let defaults = UserDefaults.standard      //UserDefaultsを参照する
+        let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
+        if restartFlag == true {
+            let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
+            let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
+            let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
+
+        }
+        
+        
         //セグメンティッドコントロールから問題ファイル名を取得する
         var filename:String //ファイル名（拡張子を除いた本体のみ）
         //選択されているセグメントのインデックス（学年名）
@@ -93,10 +109,13 @@ print("questionDataArray.count:\(QuestionDataManeger.sharedInstance.questionData
 //    //        //UserDefaultsStandardを使って、データを読み書きする
 //    // let totalNumberOfQuestions = singleton.getNumber() //シングルトンから問題の総数を取り出す
 
+            
 let defaults = UserDefaults.standard      //UserDefaultsを参照する
 let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
 let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
-let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
+let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込
+let restartFlag:Bool = true               //再開用フラグ
+defaults.set(restartFlag,forKey: "false") //FlagをFalseに戻す
                         
 print("restart正解数:correctCount:\(correctCount)")//2
 print("restart出題順:nowQuestionNo:\(nowQuestionNo)")//3
@@ -111,7 +130,7 @@ print("restart総問題数:questionCount:\(questionCount)")//5
 
             
 //次の問題文を表示する ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
-        let nowQuestionIndex = nowQuestionNo - 1 //保存しておいた出題順番号 １つ戻す
+        let nowQuestionIndex = nowQuestionNo - 1 //保存しておいた出題順番号 １つ戻す？？？？？
         //問題文の取り出し  QuestionDataManeger.sharedInstance.nextQuestion() ****
 
         let nextQuestion = QuestionDataManeger.sharedInstance.questionDataArray[nowQuestionIndex]//保存しておいた番号の問題

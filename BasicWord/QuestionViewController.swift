@@ -36,15 +36,18 @@ class QuestionViewController: UIViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
+ 
             
+            
+//再開用フラグを使用する？？？？？？？？？？？？？
         //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
             let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
             
 print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
-    let defaults = UserDefaults.standard      //UserDefaultsを参照する
-    let questionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む
-            //初回か再開時かでちがう？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
-print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
+let defaults = UserDefaults.standard      //UserDefaultsを参照する
+let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む？？？？？？？？？？？
+            //初回か再開時かでちがう？？？？？？？？？？？再開用フラグを使って？？？StartViewcontrollerで分岐する
+
  //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
  //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
  //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
@@ -54,7 +57,7 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
 //                }
             
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
-            questionNoLabel.text = "Q.\(questionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
+            questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
             answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
             answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)
@@ -160,7 +163,7 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
     //中断する　ボタンを押した時　？？？？？？
     @IBAction func clickStopButton(_ sender: UIButton) {
 
-       //問題の保存
+       //問題の保存     flagを立てておく restart == true
        //問題の取得  QuestionDataManeger.sharedInstance.questionDataArray****
         let listArray = QuestionDataManeger.sharedInstance.questionDataArray
         let questionCount = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
@@ -200,10 +203,11 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
             }
         
         
-//ユーザーデフォルトを参照する。正解数、出題順、を保存　　問題の総数は、ファイル読込の段階で行う
+//ユーザーデフォルトを参照する。再開フラグ、正解数、出題順、を保存　　問題の総数は、ファイル読込の段階で行う
         //QuestionDataManager.loadQuestion()で
- 
-        let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
+        let restartFlag:Bool = true               //再開フラグ
+        let defaults = UserDefaults.standard      //ユーザーデフォルトを参照する
+        defaults.set(restartFlag, forKey: "true") //正解数を"correctCount"として保存する
         defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
         defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
         
