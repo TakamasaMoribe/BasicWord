@@ -37,8 +37,13 @@ class QuestionViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             
-            //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
+        //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
             let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
+            
+print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
+            //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
+            //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
+            
  //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
  //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
  //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む

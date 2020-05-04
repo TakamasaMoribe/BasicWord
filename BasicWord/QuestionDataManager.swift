@@ -61,7 +61,7 @@ class QuestionDataManeger {
     var questionDataArray = [QuestionData]()
     
     //現在の問題のインデックス
-    var nowQuestionIndex:Int = 0//問題文配列のインデックス
+    var nowQuestionIndex:Int = 0//何問目かを表すインデックス：プロパティではない
 
     //シングルトンであることを保証するために初期化する
     private init(){
@@ -71,7 +71,7 @@ class QuestionDataManeger {
     //問題の読み込み　QuestionDataManeger.sharedInstance.loadQuestion() ****
     func loadQuestion()  {
         questionDataArray.removeAll() //古いデータ配列を消去しておく
-        nowQuestionIndex = 0          //インデックスも初期化
+        nowQuestionIndex = 0          //何問目かも初期化：nextQuestion()で、＋１する
         let singleton:Singleton = Singleton.sharedInstance//ファイル名用のシングルトン******
         let filename = singleton.getItem() //ファイル名をシングルトンから読み込む
         
@@ -108,9 +108,12 @@ class QuestionDataManeger {
     questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
         
     //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
-    let totalNumberOfQuestions = questionDataArray.count //問題の総数
-        for i in 0..<totalNumberOfQuestions {
+//    let totalNumberOfQuestions = questionDataArray.count //問題の総数
+//        for i in 0..<totalNumberOfQuestions {
+//            let totalNumberOfQuestions = questionDataArray.count //問題の総数
+            for i in 0..<questionDataArray.count {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
+                print("questionNo\(questionDataArray[i].questionNo)")
         }
         
     //ユーザーデフォルトに変数を保存する。（問題の総数、正解数、問題順、の３つ）
