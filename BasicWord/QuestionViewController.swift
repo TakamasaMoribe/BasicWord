@@ -41,9 +41,9 @@ class QuestionViewController: UIViewController {
             let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
             
 print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
-            //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
-            //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
-            
+    let defaults = UserDefaults.standard      //UserDefaultsを参照する
+    let questionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む
+print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
  //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
  //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
  //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
@@ -53,7 +53,7 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
 //                }
             
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
-            questionNoLabel.text = "Q.\(questionData.questionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
+            questionNoLabel.text = "Q.\(questionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
             answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
             answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)
@@ -207,9 +207,9 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
         defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
         
 //UserDefaultsStandardに保存した値の確認
-print("正解数:defaults.correctCount:\(correctCount)")
-print("次出題順:defaults.nowQuestionNo:\(questionData.questionNo)")
-print("総問題数:defaults.questionCount:\(questionCount)")
+print("正解数:defaults.correctCount:\(correctCount)")//2
+print("次出題順:defaults.nowQuestionNo:\(questionData.questionNo)")//3
+print("総問題数:defaults.questionCount:\(questionCount)")//5
         
         
     //スタート画面に戻る　StartViewControllerへ

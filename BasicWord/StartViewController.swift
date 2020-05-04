@@ -65,7 +65,9 @@ print("再開ボタン押下")
 print(QuestionDataManeger.sharedInstance.questionDataArray.count)//ここでは５
             //問題を格納するための配列　　初期化が必要かな
             var questionDataArray = [QuestionData]() //QuestionDataの型
-
+            QuestionDataManeger.sharedInstance.questionDataArray = []//初期化してみる
+print(questionDataArray)//[]
+print(QuestionDataManeger.sharedInstance.questionDataArray.count)//0
              //データの読み込み　準備
              let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
 
@@ -77,8 +79,8 @@ print(QuestionDataManeger.sharedInstance.questionDataArray.count)//ここでは�
                     QuestionDataManeger.sharedInstance.questionDataArray.append(questionData) //格納用の配列に、１行ずつ追加していく
 
                     }) //invokingからのクロージャここまで
-//print("questionDataArray[1]:\(QuestionDataManeger.sharedInstance.questionDataArray[1].question)")//OK
-//print("questionDataArray.count:\(QuestionDataManeger.sharedInstance.questionDataArray.count)") //問題の総数
+print("questionDataArray[1]:\(QuestionDataManeger.sharedInstance.questionDataArray[1].question)")//OK
+print("questionDataArray.count:\(QuestionDataManeger.sharedInstance.questionDataArray.count)") //5
                 
              }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
@@ -96,9 +98,9 @@ let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み�
 let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
 let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
                         
-print("restart正解数:correctCount:\(correctCount)")
-print("restart出題順:nowQuestionNo:\(nowQuestionNo)")
-print("restart総問題数:questionCount:\(questionCount)")
+print("restart正解数:correctCount:\(correctCount)")//2
+print("restart出題順:nowQuestionNo:\(nowQuestionNo)")//3
+print("restart総問題数:questionCount:\(questionCount)")//5
             
             
 //             let defaults = UserDefaults.standard      //UserDefaultsを参照する
