@@ -43,6 +43,7 @@ class QuestionViewController: UIViewController {
 print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
     let defaults = UserDefaults.standard      //UserDefaultsを参照する
     let questionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む
+            //初回か再開時かでちがう？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
 print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
  //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
  //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
