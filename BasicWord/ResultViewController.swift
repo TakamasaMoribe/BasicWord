@@ -26,15 +26,17 @@ class ResultViewController: UIViewController {
                 if questionData.isCorrect() {
                     correctCount += 1
             }
-
         }
         
         //正解率の計算
         let correctPercent:Float = (Float(correctCount)/Float(totalNumberOfQuestions)) * 100
- 
         //小数第一位まで計算して表示
         correctPercentLabel.text = String(format: "%.1f", correctPercent) + "%"
-    }
-    
+        
+        let restartFlag:Bool = false                    //再開用フラグ
+        let defaults = UserDefaults.standard      //UserDefaultsを参照する
+        defaults.set(restartFlag, forKey: "false") //Flagをfalseに戻す
 
+        
+    }
 }

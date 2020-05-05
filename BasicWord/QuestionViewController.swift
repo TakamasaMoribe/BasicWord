@@ -37,18 +37,33 @@ class QuestionViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
  
-            
-            
 //再開用フラグを使用する？？？？？？？？？？？？？
+            
+                    var questionCount:Int //問題の総数
+                    var correctCount:Int  //正解数
+                    var nowQuestionNo:Int = 1 //現在出題している問題の番号
+            
+                          let defaults = UserDefaults.standard      //UserDefaultsを参照する
+                          let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
+             print("restartFlag:\(restartFlag)")
+                          if restartFlag == true {
+            
+                              questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
+                              correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
+                              nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
+            }
+            
+            
         //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
             let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
             
 print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
-let defaults = UserDefaults.standard      //UserDefaultsを参照する
-let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む？？？？？？？？？？？
-            //初回か再開時かでちがう？？？？？？？？？？？再開用フラグを使って？？？StartViewcontrollerで分岐する
+            
+//let defaults = UserDefaults.standard      //UserDefaultsを参照する
+//let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む？？？？？？？？？？？再開ならば
+//            //初回か再開時かでちがう？？？？？？？？？？？再開用フラグを使って？？？StartViewcontrollerで分岐する
 
- //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった
+ //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった？？？？？
  //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
  //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
             
@@ -207,7 +222,7 @@ let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読�
         //QuestionDataManager.loadQuestion()で
         let restartFlag:Bool = true               //再開フラグ
         let defaults = UserDefaults.standard      //ユーザーデフォルトを参照する
-        defaults.set(restartFlag, forKey: "true") //正解数を"correctCount"として保存する
+        defaults.set(restartFlag, forKey: "true") //再開フラグを"true"として保存する
         defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
         defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
         

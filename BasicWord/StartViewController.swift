@@ -24,21 +24,24 @@ class StartViewController: UIViewController {
     //次画面に移る前の処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        //userDefaultStandardに保存しておいた値をクリアする。
-        //再開のために、中断時に保存しておいた値（問題の総数、正解数、問題の番号）
-        let questionCount = 0 //問題の総数
-        let correctCount = 0  //正解数
-        let nowQuestionNo = 1 //現在出題している問題の番号
-        
-        let defaults = UserDefaults.standard      //UserDefaultsを参照する
-        let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
-        if restartFlag == true {
-            let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
-            let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
-            let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
-
-        }
-        
+             //userDefaultStandardに保存しておいた値をクリアする。
+              //再開のために、中断時に保存しておいた値（問題の総数、正解数、問題の番号）
+//        var questionCount:Int = 0 //問題の総数
+//        var correctCount:Int = 0  //正解数
+//        var nowQuestionNo:Int = 1 //現在出題している問題の番号
+//              
+//              let defaults = UserDefaults.standard      //UserDefaultsを参照する
+//              let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
+// print("restartFlag:\(restartFlag)")
+//              if restartFlag == true {
+//
+//                  questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
+//                  correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
+//                  nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
+//
+//              }
+//
+ 
         
         //セグメンティッドコントロールから問題ファイル名を取得する
         var filename:String //ファイル名（拡張子を除いた本体のみ）
@@ -77,13 +80,13 @@ class StartViewController: UIViewController {
 //再開ボタンを押した時
 //        // 再開ボタンを押した時 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
          @IBAction func clickRetryButton(_ sender: Any) {
-print("再開ボタン押下")
-print(QuestionDataManeger.sharedInstance.questionDataArray.count)//ここでは５
+//print("再開ボタン押下")
+//print("再開直後のQuestionDataManeger.sharedInstance.questionDataArray.count：\(QuestionDataManeger.sharedInstance.questionDataArray.count)")//ここでは５
             //問題を格納するための配列　　初期化が必要かな
-            var questionDataArray = [QuestionData]() //QuestionDataの型
+            let questionDataArray = [QuestionData]() //QuestionDataの型
             QuestionDataManeger.sharedInstance.questionDataArray = []//初期化してみる
-print(questionDataArray)//[]
-print(QuestionDataManeger.sharedInstance.questionDataArray.count)//0
+//print("初期化後のquestionDataArray：\(questionDataArray)")//[]
+//print("初期化後のquestionDataArray.count:\(questionDataArray.count)")//0
              //データの読み込み　準備
              let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
 
@@ -111,16 +114,17 @@ print("questionDataArray.count:\(QuestionDataManeger.sharedInstance.questionData
 
             
 let defaults = UserDefaults.standard      //UserDefaultsを参照する
-let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
-let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
-let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込
-let restartFlag:Bool = true               //再開用フラグ
-defaults.set(restartFlag,forKey: "false") //FlagをFalseに戻す
+
+let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込みセットする
+let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込みセットする
+let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込みセットする
+let restartFlag =  defaults.bool(forKey: "true")             //再開用フラグを読み込みセットする
+//defaults.set(restartFlag,forKey: "true") //Flagをtrueにする
                         
 print("restart正解数:correctCount:\(correctCount)")//2
 print("restart出題順:nowQuestionNo:\(nowQuestionNo)")//3
 print("restart総問題数:questionCount:\(questionCount)")//5
-            
+print("restartFlag:\(restartFlag)")
             
 //             let defaults = UserDefaults.standard      //UserDefaultsを参照する
 //             let listNo = defaults.integer(forKey: "listNo")//問題の進み具合を読み込む

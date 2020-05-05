@@ -50,12 +50,12 @@ class QuestionData {
 // end of class QuestionData =============================================
 
 
-class QuestionDataManeger {
+class QuestionDataManager {
         
     var filename:String = ""  //問題ファイルの名前
     
-    //シングルトン  sharedInstance = QuestionDataManeger() ******
-    static let sharedInstance = QuestionDataManeger()
+    //シングルトン  sharedInstance = QuestionDataManager() ******
+    static let sharedInstance = QuestionDataManager()
     
     //問題を格納するための配列
     var questionDataArray = [QuestionData]()
@@ -68,7 +68,7 @@ class QuestionDataManeger {
     }
     
 
-    //問題の読み込み　QuestionDataManeger.sharedInstance.loadQuestion() ****
+    //問題の読み込み　QuestionDataManager.sharedInstance.loadQuestion() ****
     func loadQuestion()  {
         questionDataArray.removeAll() //古いデータ配列を消去しておく
         nowQuestionIndex = 0          //何問目かも初期化：nextQuestion()で、＋１する
@@ -131,7 +131,7 @@ print("questionNo:\(questionDataArray[i].correctAnswer)")
   // end of func loadQuestion() -----------------------------------------
 
     
-    //問題文の取り出し  QuestionDataManeger.sharedInstance.nextQuestion() ****
+    //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
     
     func nextQuestion() -> QuestionData? {
         if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
