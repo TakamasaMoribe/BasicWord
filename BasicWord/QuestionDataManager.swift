@@ -22,7 +22,7 @@ class QuestionData {
     
     //プログラム実行中に取得するデータ
     var userChoiceAnswer:String?       //ユーザーが選択した答
-    var questionCount:Int = 0          //総問題数？？？？？
+    var questionCount:Int = 0          //総問題数？？？？？不要？？？
     var questionNo:Int = 0             //現在の問題の番号？？？？？
     var correctCount:Int = 0           //ユーザーが正解した数
     
@@ -110,22 +110,17 @@ class QuestionDataManager {
     //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
 //    let totalNumberOfQuestions = questionDataArray.count //問題の総数
 //        for i in 0..<totalNumberOfQuestions {
-//            let totalNumberOfQuestions = questionDataArray.count //問題の総数
+            let totalNumberOfQuestions = questionDataArray.count //問題の総数
             for i in 0..<questionDataArray.count {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
-print("questionNo:\(questionDataArray[i].questionNo)")
-print("questionNo:\(questionDataArray[i].correctAnswer)")
+print("QuestionDataManager_questionNo:\(questionDataArray[i].questionNo)",(questionDataArray[i].correctAnswer))
         }
         
-    //ユーザーデフォルトに変数を保存する。（問題の総数、正解数、問題順、の３つ）
-    //    再起動の可能性があるので、singletonは使用しない。
-    //ここでは、問題の総数questionDataArray.countを"correctCount"として保存する
+    //ユーザーデフォルトに変数を保存する。（問題の総数）   再起動の可能性があるので、singletonは使用しない。
+    //ここでは、問題の総数questionDataArray.countを"totalNumberOfQuestions"として保存する
         let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
-        defaults.set(questionDataArray.count, forKey: "questionCount") //問題の総数を"questionCount"として保存する
+        defaults.set(questionDataArray.count, forKey: "totalNumberOfQuestions") //問題の総数を保存する
         
-        //defaults.set(correctCount, forKey: "correctCount") //正解数QuestionViewControllerで
-        //defaults.set(listNo, forKey: "listNo")             //問題の順QuestionViewControllerで
-
         
     }
   // end of func loadQuestion() -----------------------------------------

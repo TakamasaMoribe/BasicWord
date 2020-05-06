@@ -16,13 +16,13 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray *******
-        let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count
+        //問題数の取得  QuestionDataManager.sharedInstance.questionDataArray *******
+        let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count
         
         //正解数の取得
         var correctCount:Int = 0
-        //正解数を計算する  QuestionDataManeger.sharedInstance.questionDataArray ******
-            for questionData in QuestionDataManeger.sharedInstance.questionDataArray {
+        //正解数を計算する  QuestionDataManager.sharedInstance.questionDataArray ******
+            for questionData in QuestionDataManager.sharedInstance.questionDataArray {
                 if questionData.isCorrect() {
                     correctCount += 1
             }
@@ -35,7 +35,8 @@ class ResultViewController: UIViewController {
         
         let restartFlag:Bool = false                    //再開用フラグ
         let defaults = UserDefaults.standard      //UserDefaultsを参照する
-        defaults.set(restartFlag, forKey: "false") //Flagをfalseに戻す
+        defaults.set(restartFlag, forKey: "restartFlag") //Flagをfalseに戻す
+print("Result_restartFlag:\(restartFlag)")
 
         
     }

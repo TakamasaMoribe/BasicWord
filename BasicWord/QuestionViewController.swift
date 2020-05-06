@@ -17,6 +17,14 @@ class QuestionViewController: UIViewController {
         var filename:String = ""       //問題データのCSVファイル名本体部分
         var questionData:QuestionData! //前画面より受け取るデータ
         var totalNumberOfQuestions:Int = 0      //問題の総数
+
+    
+    //再開用フラグを使用する？？？？？？？？？？？？？
+    var questionCount:Int = 0 //問題の総数
+    var correctCount:Int = 0  //正解数
+    var nowQuestionNo:Int = 1 //現在出題している問題の番号
+    
+    
         
         @IBOutlet weak var progressView: UIProgressView! //解答の進行状況
         
@@ -36,43 +44,35 @@ class QuestionViewController: UIViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
- 
-//再開用フラグを使用する？？？？？？？？？？？？？
             
-                    var questionCount:Int //問題の総数
-                    var correctCount:Int  //正解数
-                    var nowQuestionNo:Int = 1 //現在出題している問題の番号
+
+//問題数と出題順の取得  sharedInstance.questionDataArray****　次の問題へ進むたびにここに戻って画面表示をする
+        let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count//問題の総数
+        var nowQuestionNo = questionData.questionNo //現在の出題順
+//print("QuestionViewController前_nowQuestionNo:\(nowQuestionNo)")//正しい
             
-                          let defaults = UserDefaults.standard      //UserDefaultsを参照する
-                          let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
-             print("restartFlag:\(restartFlag)")
-                          if restartFlag == true {
-            
-                              questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
-                              correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
-                              nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
+//再開用フラグを使用して、保存した値を使うかどうか判断する
+        let defaults = UserDefaults.standard      //UserDefaultsを参照する
+        let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
+
+print("QuestionViewController_再開用フラグrestartFlag:\(restartFlag)")
+            if restartFlag == true { //中断を再開するときは、値を読み込む
+               // totalNumberOfQuestions = defaults.integer(forKey: "totalNumberOfQuestions")//総問題数を読み込む・・中断時に保存した値。。不要か？
+                correctCount = defaults.integer(forKey: "correctCount")  //正解数を読み込む・・中断時に保存した値
+                nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む・・中断時に保存した値
             }
             
-            
-        //問題数の取得  QuestionDataManeger.sharedInstance.questionDataArray****
-            let totalNumberOfQuestions = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
-            
-print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
-            
-//let defaults = UserDefaults.standard      //UserDefaultsを参照する
-//let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//問題順を読み込む？？？？？？？？？？？再開ならば
-//            //初回か再開時かでちがう？？？？？？？？？？？再開用フラグを使って？？？StartViewcontrollerで分岐する
+        //defaults.set(restartFlag, forKey: "restartFlag") //再開フラグを"true"として保存する
+        //defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
+        //defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
+        //defaults.set(questionDataArray.count, forKey: "totalNumberOfQuestions") //問題の総数を保存する
+                            
+print("QuestionViewController後_nowQuestionNo:\(nowQuestionNo)")//正しい
+print("QuestionViewController_totalNumberOfQuestions:\(totalNumberOfQuestions)")//正しい
 
- //           let questionNo = Singleton.sharedInstance.getNumber() //今は何問目か・・・不必要になった？？？？？
- //           let defaults = UserDefaults.standard      //UserDefaultsを参照する
- //           let qCount = defaults.integer(forKey: "qCount")//問題総数を読み込む
-            
-//                if  totalNumberOfQuestions == 0 {
-//                    totalNumberOfQuestions = qCount //問題の総数。途中で保存して再開した場合に、この値を使う
-//                }
             
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
-            questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題数合計 シャッフルしたので出題順がちがう
+            questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題の総数 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
             answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
             answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)
@@ -82,7 +82,8 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
         
             //解答の進行状況を表示する プログレスビューの表示
                 var degree:Float = 0.0 //進み具合
-                degree = Float(questionData.questionNo) / Float(totalNumberOfQuestions)
+//                degree = Float(questionData.questionNo) / Float(totalNumberOfQuestions)
+degree = Float(questionData.questionNo) / Float(questionCount)
                 progressView.progress = degree //progressView を動かす
             
         }
@@ -152,10 +153,10 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
     
     
     func goNextQuestion()  {
-    //問題文の取り出し  QuestionDataManeger.sharedInstance.nextQuestion ****
+    //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion ****
     //変数の点検 ここから次の問題へ nowQuestionIndex:0 questionDataArray.count:0 になっている
             
-        guard let nextQuestion = QuestionDataManeger.sharedInstance.nextQuestion() else {
+        guard let nextQuestion = QuestionDataManager.sharedInstance.nextQuestion() else {
             //問題文に残りがない時 ＝ 最後の問題の時は、結果表示画面へすすむ
             //StoryboardのIdentifierに設定した値("result")を使って、ViewControllerを生成する
             if let resultViewController = storyboard?.instantiateViewController(withIdentifier: "result") as? ResultViewController {
@@ -174,14 +175,15 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
                 present(nextQuestionViewController,animated: true,completion: nil)
             }
     }
+
     //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    //中断する　ボタンを押した時　？？？？？？
+    //中断する　ボタンを押した時
     @IBAction func clickStopButton(_ sender: UIButton) {
 
        //問題の保存     flagを立てておく restart == true
-       //問題の取得  QuestionDataManeger.sharedInstance.questionDataArray****
-        let listArray = QuestionDataManeger.sharedInstance.questionDataArray
-        let questionCount = QuestionDataManeger.sharedInstance.questionDataArray.count//問題数
+       //問題の取得  QuestionDataManager.sharedInstance.questionDataArray****
+        let listArray = QuestionDataManager.sharedInstance.questionDataArray
+        let questionCount = QuestionDataManager.sharedInstance.questionDataArray.count//問題数
         
         //配列をCSVファイルに変換する
         var csvString = ""
@@ -210,8 +212,8 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
             
         //正解数の取得
         var correctCount:Int = 0
-        //正解数を計算する  QuestionDataManeger.sharedInstance.questionDataArray ******
-            for questionData in QuestionDataManeger.sharedInstance.questionDataArray {
+        //正解数を計算する  QuestionDataManager.sharedInstance.questionDataArray ******
+            for questionData in QuestionDataManager.sharedInstance.questionDataArray {
                 if questionData.isCorrect() {
                     correctCount += 1
                 }
@@ -222,15 +224,15 @@ print("totalNumberOfQuestions:\(totalNumberOfQuestions)")
         //QuestionDataManager.loadQuestion()で
         let restartFlag:Bool = true               //再開フラグ
         let defaults = UserDefaults.standard      //ユーザーデフォルトを参照する
-        defaults.set(restartFlag, forKey: "true") //再開フラグを"true"として保存する
+        defaults.set(restartFlag, forKey: "restartFlag") //再開フラグを"true"として保存する
         defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
         defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
         
 //UserDefaultsStandardに保存した値の確認
-print("正解数:defaults.correctCount:\(correctCount)")//2
-print("次出題順:defaults.nowQuestionNo:\(questionData.questionNo)")//3
-print("総問題数:defaults.questionCount:\(questionCount)")//5
-        
+print("clickStopButton中断直後の正解数:defaults.correctCount:\(correctCount)")//2
+print("clickStopButton中断直後の次出題順:defaults.nowQuestionNo:\(questionData.questionNo)")//3
+print("clickStopButton中断直後の総問題数:defaults.questionCount:\(questionCount)")//5
+print("clickStopButton中断直後のrestartFlag:restartFlag:\(restartFlag)")
         
     //スタート画面に戻る　StartViewControllerへ
     //StoryboardのIdentifierに設定した値("start")を使って、ViewControllerを生成する
