@@ -80,6 +80,8 @@ class QuestionDataManager {
             print("ファイルが存在しません")//エラー処理が欲しい
             return
         }
+        
+
         //CSV問題ファイルからデータを読み込む
         //クロージャ:関数の実行結果を次の処理で続けて使用する関数
         //enumerateLinesは改行（\n (バックスラッシュ + n))単位で文字列を読み込むメソッド
@@ -94,7 +96,8 @@ class QuestionDataManager {
                     //QuestionDataクラスのインスタンスとして、１つの問題文を入れる
                 self.questionDataArray.append(questionData) //格納用の配列に、１行（１つの問題文）ずつ追加していく
                 //問題番号を設定 =questionDataArrayに追加した順番を表す
-                questionData.questionNo = self.questionDataArray.count
+                questionData.questionNo = self.questionDataArray.count//問題の累積数 １からの序数になる
+
                 }) //invokingからのクロージャここまで
 
             
@@ -103,18 +106,18 @@ class QuestionDataManager {
                 return
             } //do節ここまで
 
-        
+
     //問題の出題順をシャッフルする　配列内で要素をシャッフルする
     questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
         
     //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
-//    let totalNumberOfQuestions = questionDataArray.count //問題の総数
-//        for i in 0..<totalNumberOfQuestions {
-            let totalNumberOfQuestions = questionDataArray.count //問題の総数
+//        let totalNumberOfQuestions = questionDataArray.count //問題の総数
             for i in 0..<questionDataArray.count {
-            questionDataArray[i].questionNo = i + 1 //０から始まるので+1
+                questionDataArray[i].questionNo = i + 1 //０から始まるので+1
 print("QuestionDataManager_questionNo:\(questionDataArray[i].questionNo)",(questionDataArray[i].correctAnswer))
-        }
+            }
+        
+
         
     //ユーザーデフォルトに変数を保存する。（問題の総数）   再起動の可能性があるので、singletonは使用しない。
     //ここでは、問題の総数questionDataArray.countを"totalNumberOfQuestions"として保存する
@@ -127,9 +130,12 @@ print("QuestionDataManager_questionNo:\(questionDataArray[i].questionNo)",(quest
 
     
     //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
+    //中断後再開した時　２問目の　nowQuestionIndex　の値がおかしい
     
     func nextQuestion() -> QuestionData? {
+print("func nextQuestion():\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
         if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
+
             let nextQuestion = questionDataArray[nowQuestionIndex]
             nowQuestionIndex += 1
             return nextQuestion //次の問題へ

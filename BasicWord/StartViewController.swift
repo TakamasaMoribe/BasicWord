@@ -24,25 +24,6 @@ class StartViewController: UIViewController {
     //次画面に移る前の処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-             //userDefaultStandardに保存しておいた値をクリアする。
-              //再開のために、中断時に保存しておいた値（問題の総数、正解数、問題の番号）
-//        var questionCount:Int = 0 //問題の総数
-//        var correctCount:Int = 0  //正解数
-//        var nowQuestionNo:Int = 1 //現在出題している問題の番号
-//              
-//              let defaults = UserDefaults.standard      //UserDefaultsを参照する
-//              let restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグ
-// print("restartFlag:\(restartFlag)")
-//              if restartFlag == true {
-//
-//                  questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込む
-//                  correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込む
-//                  nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む
-//
-//              }
-//
- 
-        
         //セグメンティッドコントロールから問題ファイル名を取得する
         var filename:String //ファイル名（拡張子を除いた本体のみ）
         //選択されているセグメントのインデックス（学年名）
@@ -85,7 +66,7 @@ class StartViewController: UIViewController {
 //print("再開ボタン押下")
 //print("再開直後のQuestionDataManager.sharedInstance.questionDataArray.count：\(QuestionDataManager.sharedInstance.questionDataArray.count)")//ここでは５
             //問題を格納するための配列　　初期化が必要かな
-            let questionDataArray = [QuestionData]() //QuestionDataの型
+      //      let questionDataArray = [QuestionData]() //QuestionDataの型
             QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる
 //print("初期化後のquestionDataArray：\(questionDataArray)")//[]
 //print("初期化後のquestionDataArray.count:\(questionDataArray.count)")//0
@@ -100,52 +81,48 @@ class StartViewController: UIViewController {
                     QuestionDataManager.sharedInstance.questionDataArray.append(questionData) //格納用の配列に、１行ずつ追加していく
 
                     }) //invokingからのクロージャここまで
-print("questionDataArray[1]:\(QuestionDataManager.sharedInstance.questionDataArray[1].question)")//OK
-print("questionDataArray.count:\(QuestionDataManager.sharedInstance.questionDataArray.count)") //5
+//print("questionDataArray[1]:\(QuestionDataManager.sharedInstance.questionDataArray[1].question)")//OK
+//print("questionDataArray.count:\(QuestionDataManager.sharedInstance.questionDataArray.count)") //5
                 
              }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
              } //Do節ここまで
- print(QuestionDataManager.sharedInstance.questionDataArray.count)//ここで１０になる
             
-            
-//    let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count //問題の総数
-//    singleton.saveNumber(number: totalNumberOfQuestions) //問題の総数をシングルトンに保存しておく？？？？
-//    //        //UserDefaultsStandardを使って、データを読み書きする
-//    // let totalNumberOfQuestions = singleton.getNumber() //シングルトンから問題の総数を取り出す
-
             
 let defaults = UserDefaults.standard      //UserDefaultsを参照する
-
 let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込みセットする
 let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込みセットする
 let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込みセットする
 let restartFlag =  defaults.bool(forKey: "restartFlag")      //再開用フラグを読み込みセットする
-//defaults.set(restartFlag,forKey: "true") //Flagをtrueにする
-                        
-print("restart正解数:correctCount:\(correctCount)")//2
-print("restart出題順:nowQuestionNo:\(nowQuestionNo)")//3
-print("restart総問題数:questionCount:\(questionCount)")//5
-print("restartFlag:\(restartFlag)")
             
 
-            
 //次の問題文を表示する ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
-        let nowQuestionIndex = nowQuestionNo //保存しておいた出題順番号 ？？？？？
+           // let nowQuestionNo = questionData.questionNo
+            
+        let nowQuestionIndex = nowQuestionNo //保存しておいた出題順番号 ？？？？？番号がおかしい
         //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
 
-        let nextQuestion = QuestionDataManager.sharedInstance.questionDataArray[nowQuestionIndex]//保存しておいた番号の問題
+//        let nextQuestion = QuestionDataManager.sharedInstance.questionDataArray[nowQuestionIndex]
+            //保存しておいた番号を使って、問題を取り出す
 
         //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
-
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
-//            nextQuestionViewController.totalNumberOfQuestions = questionCount//問題の総数を設定する
-            nextQuestionViewController.questionData = nextQuestion//次の問題を設定する
-            
-print("正解数：correctCount:\(correctCount)")
-print("現在の問題番号：nowQuestionIndex:\(nowQuestionIndex)")//
-print("総問題数：questionCount:\(questionCount)")
+            nextQuestionViewController.nowQuestionNo = nowQuestionIndex//問題の出題順？
+            nextQuestionViewController.questionNo = nowQuestionIndex//問題の出題順？
+            //問題文の取り出し  sharedInstance.nextQuestion() ****
+            guard let questionData = QuestionDataManager.sharedInstance.nextQuestion() else {
+                    return
+                }
+            //問題文のセット
+            nextQuestionViewController.questionData = questionData
 
+            
+print("再開ボタン 正解数：correctCount:\(correctCount)")
+print("再開ボタン 現在の問題番号：nowQuestionIndex:\(nowQuestionIndex)")//
+print("再開ボタン 現在の問題番号２：nowQuestionNo:\(nowQuestionNo)")//
+print("再開ボタン 総問題数：questionCount:\(questionCount)")
+print("再開ボタン restartFlag:\(restartFlag)")
+//,ここまでOK
         //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
         present(nextQuestionViewController,animated: true,completion: nil)
             //nowQuestionNoがおかしい
