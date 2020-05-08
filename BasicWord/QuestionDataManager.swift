@@ -133,7 +133,7 @@ print("QuestionDataManager_questionNo:\(questionDataArray[i].questionNo)",(quest
     //中断後再開した時　２問目の　nowQuestionIndex　の値がおかしい
     
     func nextQuestion() -> QuestionData? {
-print("func nextQuestion():\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
+//print("func nextQuestion():\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
         if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
 
             let nextQuestion = questionDataArray[nowQuestionIndex]

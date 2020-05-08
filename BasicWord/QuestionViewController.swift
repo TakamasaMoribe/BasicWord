@@ -60,24 +60,25 @@ var nowQuestionNo = questionData.questionNo //現在の出題順毎回読みに�
             if restartFlag == true { //中断を再開するときは、値を読み込む
                 correctCount = defaults.integer(forKey: "correctCount")  //正解数を読み込む・・中断時に保存した値
                 QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む・・中断時に保存した値
-                questionData.questionNo = nowQuestionNo
+//                questionData.questionNo = nowQuestionNo
                 
-print("再開時nowQuestionNo：\(nowQuestionNo)")
-print("再開時questionNo：\(questionNo)")
-print("再開時questionData.questionNo：\(questionData.questionNo)")//3になっている以上３つは正しい
+//print("再開時nowQuestionNo：\(nowQuestionNo)")//不正　不必要？
+//print("再開時questionNo：\(questionNo)")
+//print("再開時questionData.questionNo：\(questionData.questionNo)")//3になっている以上３つは正しい 不正　不必要？
                         restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻す
                         defaults.set(restartFlag, forKey: "restartFlag")
             } else {
             
 print("問題表示直前　questionData.nowQuestionNo:\(nowQuestionNo)")//・・・・１になっている。
-nowQuestionNo = questionData.questionNo //毎回読みに来るので、elseの中に入れたが。中断再開後２問目では不正になる
-print("QuestionViewController後_nowQuestionNo:\(nowQuestionNo)")//再開時は０　おかしい？？？？？？？？
+//nowQuestionNo = questionData.questionNo //毎回読みに来るので、elseの中に入れたが。中断再開後２問目では不正になる
+nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
+print("sharedInstance.nowQuestionIndex代入後_nowQuestionNo:\(nowQuestionNo)")//
 print("QuestionViewController_totalNumberOfQuestions:\(totalNumberOfQuestions)")//いつも正しい
 
             }
-            
+nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
 print("QuestionViewController.nowQuestionIndex:\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
-            
+ //nowQuestionNo=0????
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
             questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題の総数 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
