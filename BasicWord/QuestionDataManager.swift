@@ -41,6 +41,8 @@ class QuestionData {
     func isCorrect() -> Bool {
         if correctAnswer == userChoiceAnswer {
             correctCount += 1 //正解の数を１つ増やす？？どこでどうやって使う
+            QuestionDataManager.sharedInstance.correctCount += 1//正解の数を１つ増やす？？追加
+
             return true//正解
         }
         return false   //不正解
@@ -61,7 +63,11 @@ class QuestionDataManager {
     var questionDataArray = [QuestionData]()
     
     //現在の問題のインデックス
-    var nowQuestionIndex:Int = 0//何問目かを表すインデックス：プロパティではない
+    var nowQuestionIndex:Int = 0//何問目かを表すインデックス
+    
+    //正解数
+    var correctCount:Int = 0 //正解数の累計値　？？？？？？？？？？？？？？追加してみた
+    
 
     //シングルトンであることを保証するために初期化する
     private init(){

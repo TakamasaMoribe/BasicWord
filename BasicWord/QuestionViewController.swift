@@ -48,37 +48,27 @@ class QuestionViewController: UIViewController {
         let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count//問題の総数
 
 var nowQuestionNo = questionData.questionNo //現在の出題順毎回読みに来るので、ここを中断時に変える ここが元の位置？0
-//var nowQuestionNo = nowQuestionIndex //現在の出題順?????毎回読みに来るので、ここを中断時に変える
-//print("QuestionViewController前_nowQuestionNo:\(nowQuestionNo)")//正しい
             
 //再開用フラグを使用して、保存した値を使うかどうか判断する
         let defaults = UserDefaults.standard      //UserDefaultsを参照する
         var restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグを読み込む
 
-//print("QuestionViewController_再開用フラグrestartFlag:\(restartFlag)")
-
             if restartFlag == true { //中断を再開するときは、値を読み込む
-                correctCount = defaults.integer(forKey: "correctCount")  //正解数を読み込む・・中断時に保存した値
+                QuestionDataManager.sharedInstance.correctCount = defaults.integer(forKey: "correctCount")  //正解数を読み込む・・中断時に保存した値
                 QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む・・中断時に保存した値
 //                questionData.questionNo = nowQuestionNo
-                
-//print("再開時nowQuestionNo：\(nowQuestionNo)")//不正　不必要？
-//print("再開時questionNo：\(questionNo)")
-//print("再開時questionData.questionNo：\(questionData.questionNo)")//3になっている以上３つは正しい 不正　不必要？
                         restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻す
                         defaults.set(restartFlag, forKey: "restartFlag")
             } else {
             
-print("問題表示直前　questionData.nowQuestionNo:\(nowQuestionNo)")//・・・・１になっている。
-//nowQuestionNo = questionData.questionNo //毎回読みに来るので、elseの中に入れたが。中断再開後２問目では不正になる
 nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
 print("sharedInstance.nowQuestionIndex代入後_nowQuestionNo:\(nowQuestionNo)")//
 print("QuestionViewController_totalNumberOfQuestions:\(totalNumberOfQuestions)")//いつも正しい
-
             }
-nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
-print("QuestionViewController.nowQuestionIndex:\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
- //nowQuestionNo=0????
+            
+print("正解の数:sharedInstance.correctCount:\(QuestionDataManager.sharedInstance.correctCount)")//正解の数
+print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
+ 
             //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
             questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題の総数 シャッフルしたので出題順がちがう
             questionTextView.text = questionData.question //問題文
@@ -91,7 +81,7 @@ print("QuestionViewController.nowQuestionIndex:\(QuestionDataManager.sharedInsta
             //解答の進行状況を表示する プログレスビューの表示
                 var degree:Float = 0.0 //進み具合
                 degree = Float(questionData.questionNo) / Float(totalNumberOfQuestions)
-                progressView.progress = degree //progressView を動かす
+                progressView.progress = degree //progressView を動かす？？？？？？？？？？？？？　再開したときに表示されない
             
         }
         // end of override func viewDidLoad() ------------------------------------------------
