@@ -12,67 +12,55 @@ import AudioToolbox
 class QuestionViewController: UIViewController {
     
     let singleton:Singleton = Singleton.sharedInstance
-    
-    
-        var filename:String = ""       //問題データのCSVファイル名本体部分
-        var questionData:QuestionData! //前画面より受け取るデータ
-        var totalNumberOfQuestions:Int = 0      //問題の総数
+        
+    var filename:String = ""       //問題データのCSVファイル名本体部分
+    var questionData:QuestionData! //前画面より受け取るデータ
+    var totalNumberOfQuestions:Int = 0      //問題の総数
 
-    
-    //再開用フラグを使用する？？？？？？？？？？？？？
     var correctCount:Int = 0  //正解数
     var nowQuestionNo:Int = 1 //現在出題している問題の番号・・前画面より引き継ぐ？？？？？？？？
     var questionNo:Int = 1 //現在出題している問題の番号・・前画面より引き継ぐ？？？？？？？？
         
-        @IBOutlet weak var progressView: UIProgressView! //解答の進行状況
+    @IBOutlet weak var progressView: UIProgressView! //解答の進行状況
         
-        @IBOutlet weak var questionNoLabel: UILabel!     //問題番号
-        @IBOutlet weak var questionTextView: UITextView! //問題文
-        @IBOutlet weak var answer1Button: UIButton!      //選択肢１
-        @IBOutlet weak var answer2Button: UIButton!      //選択肢２
-        @IBOutlet weak var answer3Button: UIButton!      //選択肢３
-        @IBOutlet weak var answer4Button: UIButton!      //選択肢４
+    @IBOutlet weak var questionNoLabel: UILabel!     //問題番号
+    @IBOutlet weak var questionTextView: UITextView! //問題文
+    @IBOutlet weak var answer1Button: UIButton!      //選択肢１
+    @IBOutlet weak var answer2Button: UIButton!      //選択肢２
+    @IBOutlet weak var answer3Button: UIButton!      //選択肢３
+    @IBOutlet weak var answer4Button: UIButton!      //選択肢４
 
-        @IBOutlet weak var correctImageView: UIImageView!  //正解の画像 ◯
-        @IBOutlet weak var incorrectImageView: UIImageView!//不正解の画像　✗
+    @IBOutlet weak var correctImageView: UIImageView!  //正解の画像 ◯
+    @IBOutlet weak var incorrectImageView: UIImageView!//不正解の画像　✗
         
-        @IBOutlet weak var trueAnswer: UILabel!          //不正解の時、正解を示す hide属性
-        @IBOutlet weak var nextQuestionButton: UIButton! //次の問題へ進むボタン　 hide
+    @IBOutlet weak var trueAnswer: UILabel!          //不正解の時、正解を示す hide属性
+    @IBOutlet weak var nextQuestionButton: UIButton! //次の問題へ進むボタン　 hide
         
         
-        override func viewDidLoad() {
+    override func viewDidLoad() {
             super.viewDidLoad()
             
-
-//問題数と出題順の取得  sharedInstance.questionDataArray****　次の問題へ進むたびにここに戻って画面表示をする
+        //問題数と出題順の取得  sharedInstance.questionDataArray****　次の問題へ進むたびにここに戻って画面表示をする
         let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count//問題の総数
-
-var nowQuestionNo = questionData.questionNo //現在の出題順毎回読みに来るので、ここを中断時に変える ここが元の位置？0
+        var nowQuestionNo = questionData.questionNo //現在の出題順
             
-//再開用フラグを使用して、保存した値を使うかどうか判断する
+        //再開用フラグを使用して、保存した値を使うかどうか判断する
         let defaults = UserDefaults.standard      //UserDefaultsを参照する
         var restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグを読み込む
 
-            if restartFlag == true { //中断を再開するときは、値を読み込む
+            if restartFlag == true { //中断を再開するときは、保存した値を読み込む
                 //正解数を読み込む・・中断時に保存した値
                 QuestionDataManager.sharedInstance.correctCount = defaults.integer(forKey: "correctCount")
                 //出題順を読み込む・・中断時に保存した値
                 QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
-                        restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻す
+                        restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻しておく
                         defaults.set(restartFlag, forKey: "restartFlag")
-            } else {
-            
-//nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex 下にif節の外に動かした
-print("sharedInstance.nowQuestionIndex代入後_nowQuestionNo:\(nowQuestionNo)")//
-print("QuestionViewController_totalNumberOfQuestions:\(totalNumberOfQuestions)")//いつも正しい
-                
             }
-nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
-print("正解の数:sharedInstance.correctCount:\(QuestionDataManager.sharedInstance.correctCount)")//正解の数
-print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
- 
-            //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
-            questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題の総数 シャッフルしたので出題順がちがう
+            
+        nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex //現在の問題番号を取得する
+
+        //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
+        questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題の総数
             questionTextView.text = questionData.question //問題文
             answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
             answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)
@@ -80,10 +68,10 @@ print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager
             answer4Button.setTitle(questionData.answer4, for: UIControl.State.normal)
             trueAnswer.text = questionData.correctAnswer //正答
         
-            //解答の進行状況を表示する プログレスビューの表示
-                var degree:Float = 0.0 //進み具合
-                degree = Float(nowQuestionNo) / Float(totalNumberOfQuestions)
-                progressView.progress = degree //progressView を動かす？？？？？？？？？？？？？　再開したときに表示されない
+        //解答の進行状況を表示する プログレスビューの表示
+        var degree:Float = 0.0 //進み具合
+        degree = Float(nowQuestionNo) / Float(totalNumberOfQuestions)
+        progressView.progress = degree //progressView を動かす
             
         }
         // end of override func viewDidLoad() ------------------------------------------------
@@ -182,7 +170,7 @@ print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager
 
        //問題の保存     flagを立てておく restart == true
        //問題の取得  QuestionDataManager.sharedInstance.questionDataArray****
-        let listArray = QuestionDataManager.sharedInstance.questionDataArray
+        let listArray = QuestionDataManager.sharedInstance.questionDataArray //一時的な問題データ配列
         let questionCount = QuestionDataManager.sharedInstance.questionDataArray.count//問題数
         
         //配列をCSVファイルに変換する
@@ -199,7 +187,6 @@ print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager
                 item = item + listArray[i].answer4 + "\n" //改行
                 csvString += item
             }
-//print(csvString)
 
         //問題の保存 csvファイルとして保存する
         let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
@@ -219,20 +206,12 @@ print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager
                 }
             }
         
-        
-//ユーザーデフォルトを参照する。再開フラグ、正解数、出題順、を保存　　問題の総数は、ファイル読込の段階で行う
-        //QuestionDataManager.loadQuestion()で
-        let restartFlag:Bool = true               //再開フラグ
+        //ユーザーデフォルトを参照する。再開フラグ、正解数、出題順、を保存　　問題の総数は、ファイル読込の段階で行う
+        let restartFlag:Bool = true               //再開フラグをtrueに設定する
         let defaults = UserDefaults.standard      //ユーザーデフォルトを参照する
-        defaults.set(restartFlag, forKey: "restartFlag") //再開フラグを"true"として保存する
-        defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"として保存する
-        defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"として保存する
-        
-//UserDefaultsStandardに保存した値の確認
-print("中断直後の正解数:defaults.correctCount:\(correctCount)")//2
-print("中断直後の次出題順:defaults.nowQuestionNo:\(questionData.questionNo)")//3
-print("中断直後の総問題数:defaults.questionCount:\(questionCount)")//5
-print("中断直後のrestartFlag:restartFlag:\(restartFlag)")
+        defaults.set(restartFlag, forKey: "restartFlag") //再開フラグをtrueを"restartFlag"の名で保存する
+        defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"の名で保存する
+        defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"の名で保存する
 
         
     //スタート画面に戻る　StartViewControllerへ
@@ -241,7 +220,6 @@ print("中断直後のrestartFlag:restartFlag:\(restartFlag)")
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "start") as? StartViewController {
             present(nextQuestionViewController,animated: true,completion: nil)
         }
-        
 
     }
     

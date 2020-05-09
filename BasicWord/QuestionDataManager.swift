@@ -66,9 +66,8 @@ class QuestionDataManager {
     var nowQuestionIndex:Int = 0//何問目かを表すインデックス
     
     //正解数
-    var correctCount:Int = 0 //正解数の累計値　？？？？？？？？？？？？？？追加してみた
+    var correctCount:Int = 0 //正解数の累計値
     
-
     //シングルトンであることを保証するために初期化する
     private init(){
     }
@@ -117,13 +116,11 @@ class QuestionDataManager {
     questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
         
     //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
-//        let totalNumberOfQuestions = questionDataArray.count //問題の総数
-            for i in 0..<questionDataArray.count {
-                questionDataArray[i].questionNo = i + 1 //０から始まるので+1
-print("QuestionDataManager_questionNo:\(questionDataArray[i].questionNo)",(questionDataArray[i].correctAnswer))
-            }
-        
 
+        for i in 0..<questionDataArray.count {
+            questionDataArray[i].questionNo = i + 1 //０から始まるので+1
+        }
+        
         
     //ユーザーデフォルトに変数を保存する。（問題の総数）   再起動の可能性があるので、singletonは使用しない。
     //ここでは、問題の総数questionDataArray.countを"totalNumberOfQuestions"として保存する
@@ -136,10 +133,7 @@ print("QuestionDataManager_questionNo:\(questionDataArray[i].questionNo)",(quest
 
     
     //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
-    //中断後再開した時　２問目の　nowQuestionIndex　の値がおかしい
-    
     func nextQuestion() -> QuestionData? {
-//print("func nextQuestion():\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
         if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
 
             let nextQuestion = questionDataArray[nowQuestionIndex]

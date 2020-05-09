@@ -62,14 +62,12 @@ class StartViewController: UIViewController {
  //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //再開ボタンを押した時
 //        // 再開ボタンを押した時 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
-         @IBAction func clickRetryButton(_ sender: Any) {
-//print("再開ボタン押下")
-//print("再開直後のQuestionDataManager.sharedInstance.questionDataArray.count：\(QuestionDataManager.sharedInstance.questionDataArray.count)")//ここでは５
+    @IBAction func clickRetryButton(_ sender: Any) {
+
             //問題を格納するための配列　　初期化が必要かな
       //      let questionDataArray = [QuestionData]() //QuestionDataの型
             QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる
-//print("初期化後のquestionDataArray：\(questionDataArray)")//[]
-//print("初期化後のquestionDataArray.count:\(questionDataArray.count)")//0
+
              //データの読み込み　準備
              let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
 
@@ -81,28 +79,19 @@ class StartViewController: UIViewController {
                     QuestionDataManager.sharedInstance.questionDataArray.append(questionData) //格納用の配列に、１行ずつ追加していく
 
                     }) //invokingからのクロージャここまで
-//print("questionDataArray[1]:\(QuestionDataManager.sharedInstance.questionDataArray[1].question)")//OK
-//print("questionDataArray.count:\(QuestionDataManager.sharedInstance.questionDataArray.count)") //5
-                
+
              }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
              } //Do節ここまで
             
-            
-let defaults = UserDefaults.standard      //UserDefaultsを参照する
-let correctCount = defaults.integer(forKey: "correctCount")//正解数を読み込みセットする
-let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込みセットする
-let questionCount = defaults.integer(forKey: "questionCount")//総問題数を読み込みセットする
-let restartFlag =  defaults.bool(forKey: "restartFlag")      //再開用フラグを読み込みセットする
+        //次に表示する問題　UserDEfaultsStandaredの参照
+        let defaults = UserDefaults.standard
+        let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込みセットする
             
 
-//次の問題文を表示する ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
-           // let nowQuestionNo = questionData.questionNo
-            
-        let nowQuestionIndex = nowQuestionNo //保存しておいた出題順番号 ？？？？？番号がおかしい
+//次の問題文を表示する
+        let nowQuestionIndex = nowQuestionNo //保存しておいた出題順番号
         //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
-
-//        let nextQuestion = QuestionDataManager.sharedInstance.questionDataArray[nowQuestionIndex]
             //保存しておいた番号を使って、問題を取り出す
 
         //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
@@ -116,19 +105,12 @@ let restartFlag =  defaults.bool(forKey: "restartFlag")      //再開用フラ�
             //問題文のセット
             nextQuestionViewController.questionData = questionData
 
-            
-print("再開ボタン 正解数：correctCount:\(correctCount)")
-print("再開ボタン 現在の問題番号：nowQuestionIndex:\(nowQuestionIndex)")//
-print("再開ボタン 総問題数：questionCount:\(questionCount)")
-print("再開ボタン restartFlag:\(restartFlag)")
-//,ここまでOK
-        //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
+        //セグエを利用せずに画面をモーダルで表示する
         present(nextQuestionViewController,animated: true,completion: nil)
-            //nowQuestionNoがおかしい
-            //questionCountは５でOK
-            }
 
-         }
+        }
+
+    }
 
  
 }
