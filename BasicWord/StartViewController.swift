@@ -119,7 +119,6 @@ let restartFlag =  defaults.bool(forKey: "restartFlag")      //再開用フラ�
             
 print("再開ボタン 正解数：correctCount:\(correctCount)")
 print("再開ボタン 現在の問題番号：nowQuestionIndex:\(nowQuestionIndex)")//
-print("再開ボタン 現在の問題番号２：nowQuestionNo:\(nowQuestionNo)")//
 print("再開ボタン 総問題数：questionCount:\(questionCount)")
 print("再開ボタン restartFlag:\(restartFlag)")
 //,ここまでOK

@@ -54,18 +54,20 @@ var nowQuestionNo = questionData.questionNo //現在の出題順毎回読みに�
         var restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグを読み込む
 
             if restartFlag == true { //中断を再開するときは、値を読み込む
-                QuestionDataManager.sharedInstance.correctCount = defaults.integer(forKey: "correctCount")  //正解数を読み込む・・中断時に保存した値
-                QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込む・・中断時に保存した値
-//                questionData.questionNo = nowQuestionNo
+                //正解数を読み込む・・中断時に保存した値
+                QuestionDataManager.sharedInstance.correctCount = defaults.integer(forKey: "correctCount")
+                //出題順を読み込む・・中断時に保存した値
+                QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
                         restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻す
                         defaults.set(restartFlag, forKey: "restartFlag")
             } else {
             
-nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
+//nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex 下にif節の外に動かした
 print("sharedInstance.nowQuestionIndex代入後_nowQuestionNo:\(nowQuestionNo)")//
 print("QuestionViewController_totalNumberOfQuestions:\(totalNumberOfQuestions)")//いつも正しい
+                
             }
-            
+nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
 print("正解の数:sharedInstance.correctCount:\(QuestionDataManager.sharedInstance.correctCount)")//正解の数
 print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
  
@@ -80,7 +82,7 @@ print("問題順：QuestionViewController.nowQuestionIndex:\(QuestionDataManager
         
             //解答の進行状況を表示する プログレスビューの表示
                 var degree:Float = 0.0 //進み具合
-                degree = Float(questionData.questionNo) / Float(totalNumberOfQuestions)
+                degree = Float(nowQuestionNo) / Float(totalNumberOfQuestions)
                 progressView.progress = degree //progressView を動かす？？？？？？？？？？？？？　再開したときに表示されない
             
         }
