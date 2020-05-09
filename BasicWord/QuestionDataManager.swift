@@ -22,7 +22,6 @@ class QuestionData {
     
     //プログラム実行中に取得するデータ
     var userChoiceAnswer:String?       //ユーザーが選択した答
-    var questionCount:Int = 0          //総問題数？？？？？不要？？？
     var questionNo:Int = 0             //現在の問題の番号？？？？？
     var correctCount:Int = 0           //ユーザーが正解した数
     
@@ -86,11 +85,10 @@ class QuestionDataManager {
             return
         }
         
-
         //CSV問題ファイルからデータを読み込む
         //クロージャ:関数の実行結果を次の処理で続けて使用する関数
         //enumerateLinesは改行（\n (バックスラッシュ + n))単位で文字列を読み込むメソッド
-        //stopはそのままの意味でstop変数にtrueを代入した時にループが終了する
+        //stopは、stop変数にtrueを代入した時にループが終了する
         //lineやstopは決められた名前ではなく、自分の好きな名前を付けられる
         do {
             let csvStringData = try String(contentsOfFile: csvFilePath,encoding: String.Encoding.utf8)
@@ -102,9 +100,7 @@ class QuestionDataManager {
                 self.questionDataArray.append(questionData) //格納用の配列に、１行（１つの問題文）ずつ追加していく
                 //問題番号を設定 =questionDataArrayに追加した順番を表す
                 questionData.questionNo = self.questionDataArray.count//問題の累積数 １からの序数になる
-
                 }) //invokingからのクロージャここまで
-
             
             }catch let error {
                 print("ファイル読み込みエラー:\(error)")
@@ -116,11 +112,9 @@ class QuestionDataManager {
     questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
         
     //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
-
         for i in 0..<questionDataArray.count {
             questionDataArray[i].questionNo = i + 1 //０から始まるので+1
         }
-        
         
     //ユーザーデフォルトに変数を保存する。（問題の総数）   再起動の可能性があるので、singletonは使用しない。
     //ここでは、問題の総数questionDataArray.countを"totalNumberOfQuestions"として保存する

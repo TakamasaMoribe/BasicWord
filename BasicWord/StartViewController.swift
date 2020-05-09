@@ -50,8 +50,16 @@ class StartViewController: UIViewController {
             }
         //問題文のセット
         nextViewController.questionData = questionData
-        }
         
+        //UserDefaultsStandardの参照
+        let restartFlag:Bool = false              //再開用フラグをfalseに戻しておく
+        let defaults = UserDefaults.standard      //UserDefaultsを参照する
+        defaults.set(restartFlag, forKey: "restartFlag") //Flagをfalseに戻す
+        
+    }
+ // end of   override func prepare(for segue: UIStoryboardSegue)---------------------------------
+        
+    
     //タイトルに戻ってくるときに呼び出される処理
     @IBAction func goToTitle(_ segue:UIStoryboardSegue){
     }
@@ -61,15 +69,15 @@ class StartViewController: UIViewController {
     
  //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //再開ボタンを押した時
-//        // 再開ボタンを押した時 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
+// 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
     @IBAction func clickRetryButton(_ sender: Any) {
 
-            //問題を格納するための配列　　初期化が必要かな
-      //      let questionDataArray = [QuestionData]() //QuestionDataの型
-            QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる
+    //問題を格納するための配列　　初期化が必要かな
+    //      let questionDataArray = [QuestionData]() //QuestionDataの型
+        QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる
 
-             //データの読み込み　準備
-             let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
+        //データの読み込み　準備
+        let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
 
              do {
                 let csvStringData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
@@ -83,22 +91,17 @@ class StartViewController: UIViewController {
              }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
              } //Do節ここまで
-            
-        //次に表示する問題　UserDEfaultsStandaredの参照
-        let defaults = UserDefaults.standard
-        let nowQuestionNo = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込みセットする
-            
-
+        
+        
 //次の問題文を表示する
-        let nowQuestionIndex = nowQuestionNo //保存しておいた出題順番号
-        //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
-            //保存しておいた番号を使って、問題を取り出す
+        //次に表示する問題　UserDefaultsStandaredの参照
+        let defaults = UserDefaults.standard
+        let nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")//出題順を読み込みセットする
 
         //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
-            nextQuestionViewController.nowQuestionNo = nowQuestionIndex//問題の出題順？
-            nextQuestionViewController.questionNo = nowQuestionIndex//問題の出題順？
-            //問題文の取り出し  sharedInstance.nextQuestion() ****
+            nextQuestionViewController.nowQuestionNo = nowQuestionIndex//問題の出題順
+            //問題文の取り出し
             guard let questionData = QuestionDataManager.sharedInstance.nextQuestion() else {
                     return
                 }
