@@ -39,7 +39,7 @@ class QuestionData {
     //正誤の判定をして、Bool値を返す　Boolではなく、Intで返せば、正解数の保持は可能？
     func isCorrect() -> Bool {
         if correctAnswer == userChoiceAnswer {
-            correctCount += 1 //正解の数を１つ増やす？？どこでどうやって使う
+//            correctCount += 1 //正解の数を１つ増やす？？どこでどうやって使う ？？？？？？？？？？？？？？
             QuestionDataManager.sharedInstance.correctCount += 1//正解の数を１つ増やす？？追加
 
             return true//正解
