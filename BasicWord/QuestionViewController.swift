@@ -57,7 +57,6 @@ class QuestionViewController: UIViewController {
                     restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻しておく
                     defaults.set(restartFlag, forKey: "restartFlag")
                     nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex //現在の問題番号を取得する
-  print("再開後最初の問題")
 
                 
             } else {

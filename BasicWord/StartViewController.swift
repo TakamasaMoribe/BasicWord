@@ -97,28 +97,22 @@ class StartViewController: UIViewController {
         //次に表示する問題　UserDefaultsStandaredの参照
         let defaults = UserDefaults.standard
         QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
-        QuestionDataManager.sharedInstance.nowQuestionIndex -= 1//ためし
-//        var nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")// 影響なし
         //出題順を読み込みセットするが、中断するときに問題を表示する時点で、すでに＋１になっている
-//        nowQuestionIndex = 4 //一つ戻してみる 影響なし
+        QuestionDataManager.sharedInstance.nowQuestionIndex -= 1//
+
         //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
-//          nextQuestionViewController.nowQuestionNo = nowQuestionIndex//問題の出題順   影響なし
             //問題文の取り出し
-            
             guard let questionData = QuestionDataManager.sharedInstance.nextQuestion() else {
                     return
                 }
-            print("questionData:\(questionData)")
+
             //問題文のセット
             nextQuestionViewController.questionData = questionData
-            print(questionData.questionNo,questionData.question,questionData.correctAnswer)
-            
 
         //セグエを利用せずに画面をモーダルで表示する
         present(nextQuestionViewController,animated: true,completion: nil)
-print("startView")
-//最初の表示が終わると一度ここに戻る
+
         }
 
     }
