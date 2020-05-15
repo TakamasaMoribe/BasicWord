@@ -241,6 +241,7 @@
                         <outlet property="answer2Button" destination="zdD-vK-QRR" id="jY9-0I-4I2"/>
                         <outlet property="answer3Button" destination="477-Xk-Ady" id="PR2-Y0-foW"/>
                         <outlet property="answer4Button" destination="X8s-il-dYj" id="iip-Xl-I6f"/>
+                        <outlet property="button" destination="eUX-eD-Itz" id="Bwp-QR-e1x"/>
                         <outlet property="correctImageView" destination="hoI-2O-rOO" id="Y44-KG-WdI"/>
                         <outlet property="incorrectImageView" destination="qS4-nr-YFj" id="1rj-P7-ChA"/>
                         <outlet property="nextQuestionButton" destination="jhF-YZ-pu5" id="2sB-xK-SYo"/>
