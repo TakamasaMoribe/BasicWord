@@ -45,30 +45,32 @@ class QuestionViewController: UIViewController {
         var nowQuestionNo = questionData.questionNo //現在の出題順　
             
         //再開用フラグを使用して、保存した値を使うかどうか判断する
-        //問題の出題順番号は正しく表示されるが、中断時の問題が表示されず、次の出題問題になる。同じ問題が続く？？？？？？？？
         let defaults = UserDefaults.standard      //UserDefaultsを参照する
-        var restartFlag = defaults.bool(forKey: "restartFlag")//再開用フラグを読み込む
+        var restartFlag = defaults.bool(forKey: "restartFlag") //再開用フラグを読み込む
 
             if restartFlag == true { //中断を再開するときは、保存した値を読み込む
-                //正解数を読み込む・・中断時に保存した値
+                //正解数を読み込む
                 QuestionDataManager.sharedInstance.correctCount = defaults.integer(forKey: "correctCount")
-                //出題順を読み込む・・中断時に保存した値
+                //出題順を読み込む
                 QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
+                //現在の問題番号を取得する。上の行もこの行も必要
+                nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
                     restartFlag = false  //再開して１回目に読み込んだら、フラグをfalseに戻しておく
                     defaults.set(restartFlag, forKey: "restartFlag")
-                    nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex //現在の問題番号を取得する
-
                 
             } else {
-                nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex //現在の問題番号を取得する
+                //現在の問題番号を取得する
+                nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
+                
             }
+        
         //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
         questionNoLabel.text = "Q.\(nowQuestionNo)" + "/\(totalNumberOfQuestions)"//　出題順/問題の総数
             questionTextView.text = questionData.question //問題文
-            answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal)
-            answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal)
-            answer3Button.setTitle(questionData.answer3, for: UIControl.State.normal)
-            answer4Button.setTitle(questionData.answer4, for: UIControl.State.normal)
+            answer1Button.setTitle(questionData.answer1, for: UIControl.State.normal) //選択肢１
+            answer2Button.setTitle(questionData.answer2, for: UIControl.State.normal) //選択肢２
+            answer3Button.setTitle(questionData.answer3, for: UIControl.State.normal) //選択肢３
+            answer4Button.setTitle(questionData.answer4, for: UIControl.State.normal) //選択肢４
             trueAnswer.text = questionData.correctAnswer //正答
         
         //解答の進行状況を表示する プログレスビューの表示
@@ -76,8 +78,8 @@ class QuestionViewController: UIViewController {
         degree = Float(nowQuestionNo) / Float(totalNumberOfQuestions)
         progressView.progress = degree //progressView を動かす
             
-        }
-        // end of override func viewDidLoad() ------------------------------------------------
+    }
+    // end of override func viewDidLoad() ------------------------------------------------
 
     
     //選択肢１を選んだ時
@@ -141,10 +143,9 @@ class QuestionViewController: UIViewController {
         goNextQuestion() //次の問題へ進む
     }
     
-    
+    //------------------------------------------------------------------------------
     func goNextQuestion()  {
-    //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion ****
-    //変数の点検 ここから次の問題へ nowQuestionIndex:0 questionDataArray.count:0 になっている
+    //問題文の取り出し
             
         guard let nextQuestion = QuestionDataManager.sharedInstance.nextQuestion() else {
             //問題文に残りがない時 ＝ 最後の問題の時は、結果表示画面へすすむ
@@ -158,14 +159,13 @@ class QuestionViewController: UIViewController {
             
             //問題文に残りがあり、次の問題文を表示する時
             //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
-            //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
             if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
                 nextQuestionViewController.questionData = nextQuestion
                 //StoryboardのSegueを利用しない明示的な画面遷移処理
                 present(nextQuestionViewController,animated: true,completion: nil)
             }
     }
-
+    // end of func goNextQuestion() ------------------------------------------------
     
     //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     //中断する　ボタンを押した時
@@ -219,11 +219,12 @@ class QuestionViewController: UIViewController {
         
     //スタート画面に戻る　StartViewControllerへ
     //StoryboardのIdentifierに設定した値("start")を使って、ViewControllerを生成する
-    //presentメソッドは、セグエを利用せずに画面をモーダルで表示するメソッド
+
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "start") as? StartViewController {
             present(nextQuestionViewController,animated: true,completion: nil)
         }
 
     }
+    // end of func @IBAction func clickStopButton -----------------------------------------------
     
 }

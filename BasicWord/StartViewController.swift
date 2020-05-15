@@ -57,66 +57,60 @@ class StartViewController: UIViewController {
         defaults.set(restartFlag, forKey: "restartFlag") //Flagをfalseに戻す
         
     }
- // end of   override func prepare(for segue: UIStoryboardSegue)---------------------------------
+    // end of   override func prepare(for segue: UIStoryboardSegue)--------------------------
         
     
     //タイトルに戻ってくるときに呼び出される処理
     @IBAction func goToTitle(_ segue:UIStoryboardSegue){
     }
         
-
     
     
- //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //再開ボタンを押した時
 // 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
     @IBAction func clickRetryButton(_ sender: Any) {
 
-    //問題を格納するための配列　　初期化が必要かな
-    //      let questionDataArray = [QuestionData]() //QuestionDataの型
-        QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる
+    //問題を格納するための配列 questionDataArray = [QuestionData]() //QuestionDataの型
+    QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる
 
-        //データの読み込み　準備
-        let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
+    //データの読み込み　準備
+    let thePath = NSHomeDirectory()+"/Documents/tempCSVFile.csv"
 
-             do {
-                let csvStringData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
-                csvStringData.enumerateLines(invoking: {(line,stop) in //改行されるごとに分割する
-                    let questionSourceDataArray = line.components(separatedBy: ",") //１行を","で分割して配列に入れる
-                    let questionData = QuestionData(questionSourceDataArray: questionSourceDataArray)//１行分の配列
-                    QuestionDataManager.sharedInstance.questionDataArray.append(questionData) //格納用の配列に、１行ずつ追加していく
+        do {
+            let csvStringData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+            csvStringData.enumerateLines(invoking: {(line,stop) in //改行されるごとに分割する
+                let questionSourceDataArray = line.components(separatedBy: ",") //１行を","で分割して配列に入れる
+                let questionData = QuestionData(questionSourceDataArray:questionSourceDataArray) //１行分の配列
+                    QuestionDataManager.sharedInstance.questionDataArray.append(questionData)
+                    //格納用の配列に、１行ずつ追加していく
+                }) //invokingからのクロージャここまで
 
-                    }) //invokingからのクロージャここまで
-
-             }catch let error as NSError {
+            }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
-             } //Do節ここまで
+        } //Do節ここまで
         
-        
-//次の問題文を表示する
-        //次に表示する問題　UserDefaultsStandaredの参照
-        let defaults = UserDefaults.standard
-        QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
-        //出題順を読み込みセットするが、中断するときに問題を表示する時点で、すでに＋１になっている
-        QuestionDataManager.sharedInstance.nowQuestionIndex -= 1//
+    //次の問題文を表示する。シャッフルは不要。中断時にシャッフル済の状態で保存してある。
+    //次に表示する問題。出題順を読み込みセットする。
+    let defaults = UserDefaults.standard
+    QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
+    //QuestionViewの画面で中断したときに、すでに次の問題が表示されているので１つ戻す
+    QuestionDataManager.sharedInstance.nowQuestionIndex -= 1//
 
-        //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
+    //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
             //問題文の取り出し
             guard let questionData = QuestionDataManager.sharedInstance.nextQuestion() else {
                     return
                 }
-
             //問題文のセット
             nextQuestionViewController.questionData = questionData
-
-        //セグエを利用せずに画面をモーダルで表示する
-        present(nextQuestionViewController,animated: true,completion: nil)
-
+            //セグエを利用せずに画面をモーダルで表示する
+            present(nextQuestionViewController,animated: true,completion: nil)
         }
 
     }
-
+    // end of  @IBAction func clickRetryButton --------------------------------------------
  
 }
 

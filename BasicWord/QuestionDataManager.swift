@@ -22,7 +22,7 @@ class QuestionData {
     
     //プログラム実行中に取得するデータ
     var userChoiceAnswer:String?       //ユーザーが選択した答
-    var questionNo:Int = 0             //現在の問題の番号？？？？？
+    var questionNo:Int = 0             //現在の問題の番号
     var correctCount:Int = 0           //ユーザーが正解した数
     
     //イニシャライザー　配列questionSourceDataArrayを受け取ることができる
@@ -39,9 +39,7 @@ class QuestionData {
     //正誤の判定をして、Bool値を返す　Boolではなく、Intで返せば、正解数の保持は可能？
     func isCorrect() -> Bool {
         if correctAnswer == userChoiceAnswer {
-            correctCount += 1 //正解の数を１つ増やす？？どこでどうやって使う
-            QuestionDataManager.sharedInstance.correctCount += 1//正解の数を１つ増やす？？追加
-
+            QuestionDataManager.sharedInstance.correctCount += 1//正解の数を１つ増やす
             return true//正解
         }
         return false   //不正解
@@ -53,30 +51,30 @@ class QuestionData {
 
 class QuestionDataManager {
         
-    var filename:String = ""  //問題ファイルの名前
+    var filename:String = ""  //問題ファイルの名前の初期化
     
-    //シングルトン  sharedInstance = QuestionDataManager() ******
+    //シングルトン sharedInstance の宣言
     static let sharedInstance = QuestionDataManager()
     
     //問題を格納するための配列
     var questionDataArray = [QuestionData]()
     
     //現在の問題のインデックス
-    var nowQuestionIndex:Int = 0//何問目かを表すインデックス
+    var nowQuestionIndex:Int = 0 //何問目かを表すインデックス
     
     //正解数
     var correctCount:Int = 0 //正解数の累計値
     
-    //シングルトンであることを保証するために初期化する
+    //シングルトンであることを保証するために、private宣言をする
     private init(){
     }
     
 
-    //問題の読み込み　QuestionDataManager.sharedInstance.loadQuestion() ****
+    //問題の読み込み
     func loadQuestion()  {
         questionDataArray.removeAll() //古いデータ配列を消去しておく
         nowQuestionIndex = 0          //何問目かも初期化：nextQuestion()で、＋１する
-        let singleton:Singleton = Singleton.sharedInstance//ファイル名用のシングルトン******
+        let singleton:Singleton = Singleton.sharedInstance//ファイル名用のシングルトン
         let filename = singleton.getItem() //ファイル名をシングルトンから読み込む
         
         //問題ファイルのパスを指定する　セクメンティッドコントロールから取得する
@@ -108,33 +106,33 @@ class QuestionDataManager {
             } //do節ここまで
 
 
-    //問題の出題順をシャッフルする　配列内で要素をシャッフルする
-    questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
+        //問題の出題順をシャッフルする。配列内で要素をシャッフルする
+        questionDataArray.shuffle() //シャッフルそのものは、これだけでOK
         
-    //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
-        for i in 0..<questionDataArray.count {
-            questionDataArray[i].questionNo = i + 1 //０から始まるので+1
-        }
+        //シャッフル後の出題順 出題順questionNoを、１から昇順につけ直す
+            for i in 0..<questionDataArray.count {
+                questionDataArray[i].questionNo = i + 1 //０から始まるので+1
+            }
         
-    //ユーザーデフォルトに変数を保存する。（問題の総数）   再起動の可能性があるので、singletonは使用しない。
-    //ここでは、問題の総数questionDataArray.countを"totalNumberOfQuestions"として保存する
+        //ユーザーデフォルトに変数を保存する。（問題の総数）   再起動の可能性があるので、singletonは使用しない。
+        //問題の総数questionDataArray.countを"totalNumberOfQuestions"として保存する
         let defaults = UserDefaults.standard                 //ユーザーデフォルトを参照する
-        defaults.set(questionDataArray.count, forKey: "totalNumberOfQuestions") //問題の総数を保存する
-        
+        defaults.set(questionDataArray.count, forKey: "totalNumberOfQuestions") //問題の総数
         
     }
-  // end of func loadQuestion() -----------------------------------------
+    // end of func loadQuestion() -----------------------------------------------------------
 
     
-    //問題文の取り出し  QuestionDataManager.sharedInstance.nextQuestion() ****
+    //次の問題文の取り出し-----------------------------------------------------------------------
     func nextQuestion() -> QuestionData? {
         if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
-
             let nextQuestion = questionDataArray[nowQuestionIndex]
             nowQuestionIndex += 1
             return nextQuestion //次の問題へ
         }
         return nil //全部解き終わって、次の問題がない時
     }
- 
+    // end of func nextQuestion() -----------------------------------------------------------
+    
 }
+
