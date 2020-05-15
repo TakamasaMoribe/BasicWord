@@ -96,13 +96,13 @@ class QuestionViewController: UIViewController {
     
 //ボタンの装飾
     func designButton(buttonObj:UIButton)  {
-        let button:UIButton = buttonObj //buttonにbuttonObjを設定する
-        let rgba = UIColor(red: 150/255, green: 200/255, blue: 50/255, alpha: 1.0) // ボタン背景色設定
+        let button:UIButton = buttonObj //buttonに引数buttonObjを設定する
+        let rgba = UIColor(red: 50/255, green: 255/255, blue: 0/255, alpha: 0.5) // ボタン背景色設定
         button.backgroundColor = rgba                                               // 背景色
         button.layer.borderWidth = 0.5                                              // 枠線の幅
         button.layer.borderColor = UIColor.black.cgColor                            // 枠線の色
         button.layer.cornerRadius = 2.0                                             // 角丸のサイズ
-        button.setTitleColor(UIColor.white, for: UIControl.State.normal)            // タイトルの色
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)            // タイトルの色
     }
     
     
