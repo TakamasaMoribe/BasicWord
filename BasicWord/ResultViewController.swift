@@ -35,6 +35,9 @@ class ResultViewController: UIViewController {
 
     //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝
     func showHistory()  {
+        
+        //履歴データ全体
+        var historyData:String = ""
         //１回分の履歴データ文字列
         var historyStr:String = ""
         
@@ -60,11 +63,13 @@ class ResultViewController: UIViewController {
         historyStr = timeData + "    " + filename + "    " + correctRate
         
         //テキストビューに表示
-        historyTextView.text = historyStr
+        historyTextView.text = historyStr//１回分（今回の分だけ）
         
-        saveHistory(histryStr:historyStr)
+        historyData = saveHistory(historyStr:historyStr)
+        
+        historyTextView.text = historyData//全部の履歴
  
-
+//print(historyData)
 
         
     }
@@ -72,11 +77,11 @@ class ResultViewController: UIViewController {
 
     
     //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    func saveHistory(histryStr:String)  {
+    func saveHistory(historyStr:String) -> String {
         
         //データの読み込み　準備
         let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
-        var histryData:String = "" //履歴データを入れる文字列
+        var historyData:String = "" //履歴データを入れる文字列
         
         //既存の履歴ファイルを読み込む。
         //ファイルマネージャーを設定する
@@ -89,32 +94,32 @@ class ResultViewController: UIViewController {
                 try textData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
             }catch {
             }
-            return
+            return "ファイル作成に失敗"
         } //guard節ここまで
         
         //ファイル読込
         do {
-            let histryData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+            let textData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+            historyData = textData//取り出したテキストデータをhistoryDataに入れる
             }catch let error as NSError {
             print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
-print("histryData1:\(histryData)")
+print("historyData1:\(historyData)")//
         //今回の履歴を追加する
-        histryData.append(histryStr)//今回の履歴を追加する
+        historyData.append(historyStr)//今回の履歴を追加する
         
         //履歴ファイルを保存する
         do {
-            try histryData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+            try historyData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
         }catch {
         }
-print("histryData2:\(histryData)")
+print("historyData2:\(historyData)")
 
-        return
-        
-        
+        return historyData//履歴ファイルに追加して返す
+
         
     }
-    // end of  saveHistory(histryStr:String)  ------------------------
+    // end of  saveHistory(historyStr:String)  ------------------------
 
     
     //次画面に移る前の処理 （セグエを利用して、スタート画面に戻る）＝＝＝＝＝＝＝＝＝
