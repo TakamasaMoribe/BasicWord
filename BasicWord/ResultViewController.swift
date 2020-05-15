@@ -39,7 +39,7 @@ class ResultViewController: UIViewController {
         //履歴データ全体
         var historyData:String = ""
         //１回分の履歴データ文字列
-        var historyStr:String = ""
+        var nowResult:String = ""//nowResult
         
         //現在の日付を取得
         let formatter = DateFormatter() //表示形式の指定
@@ -51,7 +51,7 @@ class ResultViewController: UIViewController {
         timeData = String(formatter.string(from:now))
         timeData = String(timeData.suffix(11))//後ろから11文字取り出す
 
-        //ファイル名の取得
+        //ファイル名の取得・・・問題の種類を表す
         let singleton:Singleton = Singleton.sharedInstance
         let filename = singleton.getItem() //ファイル名を読み込む
         
@@ -60,31 +60,30 @@ class ResultViewController: UIViewController {
         correctRate = String(correctPercentLabel.text!)
         
         //１回分の履歴文字列をつくる
-        historyStr = timeData + "    " + filename + "    " + correctRate
+        nowResult = timeData + "    " + filename + "    " + correctRate
         
         //テキストビューに表示
-        historyTextView.text = historyStr//１回分（今回の分だけ）
+        historyTextView.text = nowResult//１回分（今回の分だけ）の表示
         
-        historyData = saveHistory(historyStr:historyStr)
+        historyData = saveHistory(nowResult:nowResult)//過去の履歴を追加する
         
-        historyTextView.text = historyData//全部の履歴
- 
-//print(historyData)
+        historyTextView.text = historyData//全部の履歴の表示
 
         
     }
     // end of  func showHistory()  -----------------------------------
 
     
-    //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-    func saveHistory(historyStr:String) -> String {
+    //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝履歴の消去もつくる
+    func saveHistory(nowResult:String) -> String {
         
-        //データの読み込み　準備
+        //過去の履歴データファイルの読み込み　準備
         let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
-        var historyData:String = "" //履歴データを入れる文字列
+        var tempText:String = "" //履歴データテキストを読み込む一時使用文字列
+        var historyData:String = "" //履歴データを返す文字列
         
         //既存の履歴ファイルを読み込む。
-        //ファイルマネージャーを設定する
+        //ファイルマネージャーを使って、ファイルの有無を調べる
         let fileManager = FileManager.default
 
         guard (fileManager.fileExists(atPath: thePath)) else {
@@ -97,29 +96,30 @@ class ResultViewController: UIViewController {
             return "ファイル作成に失敗"
         } //guard節ここまで
         
-        //ファイル読込
+        //過去の履歴データファイル読込  tempTextとして取り出す
         do {
-            let textData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
-            historyData = textData//取り出したテキストデータをhistoryDataに入れる
+            let text = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+            tempText = text//取り出したテキストデータをtempTextに入れる
             }catch let error as NSError {
             print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
-print("historyData1:\(historyData)")//
-        //今回の履歴を追加する
-        historyData.append(historyStr)//今回の履歴を追加する
+//print("historyData1:\(historyData)")//
+        
+tempText = ""//履歴の消去
+       historyData = nowResult //今回の成績を履歴データに入れる
+       historyData.append(tempText) //今回の成績に、過去の履歴(tempText)を追加する
         
         //履歴ファイルを保存する
         do {
             try historyData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
         }catch {
         }
-print("historyData2:\(historyData)")
+//print("historyData2:\(historyData)")
 
         return historyData//履歴ファイルに追加して返す
-
         
     }
-    // end of  saveHistory(historyStr:String)  ------------------------
+    // end of  saveHistory(nowResult:String)  ------------------------
 
     
     //次画面に移る前の処理 （セグエを利用して、スタート画面に戻る）＝＝＝＝＝＝＝＝＝

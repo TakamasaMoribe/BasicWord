@@ -8,15 +8,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "064EEE6C-56D5-4022-BC25-2889CE405464"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BasicWord/ResultViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "saveHistory(historyStr:)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "saveHistory(nowResult:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -24,15 +24,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3587B2E0-A69C-4B6B-935E-82318E789C67"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BasicWord/ResultViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "saveHistory(historyStr:)"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "saveHistory(nowResult:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -40,7 +40,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4D980FB0-FF4C-4861-AD3D-35BBD3C16923"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BasicWord/ResultViewController.swift"
