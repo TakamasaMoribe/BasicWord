@@ -97,7 +97,7 @@ class QuestionViewController: UIViewController {
 //ボタンの装飾
     func designButton(buttonObj:UIButton)  {
         let button:UIButton = buttonObj //buttonに引数buttonObjを設定する
-        let rgba = UIColor(red: 50/255, green: 255/255, blue: 0/255, alpha: 0.5) // ボタン背景色設定
+        let rgba = UIColor(red: 50/255, green: 255/255, blue: 0/255, alpha: 0.3) // ボタン背景色設定
         button.backgroundColor = rgba                                               // 背景色
         button.layer.borderWidth = 0.5                                              // 枠線の幅
         button.layer.borderColor = UIColor.black.cgColor                            // 枠線の色
