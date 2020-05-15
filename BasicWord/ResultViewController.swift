@@ -61,6 +61,12 @@ class ResultViewController: UIViewController {
         
         //テキストビューに表示
         historyTextView.text = historyStr
+        
+        saveHistory(histryStr:historyStr)
+ 
+
+
+        
     }
     // end of  func showHistory()  -----------------------------------
 
@@ -68,25 +74,42 @@ class ResultViewController: UIViewController {
     //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     func saveHistory(histryStr:String)  {
         
-        var histryData:String = "" //履歴データを入れる文字列の初期化
-        
-        //既存の履歴ファイルを読み込む。まだなければ新しくつくる
-        
         //データの読み込み　準備
         let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
+        var histryData:String = "" //履歴データを入れる文字列
+        
+        //既存の履歴ファイルを読み込む。
+        //ファイルマネージャーを設定する
+        let fileManager = FileManager.default
 
+        guard (fileManager.fileExists(atPath: thePath)) else {
+            //指定のファイルがなければ、新しくつくる
+            let textData:String = ""
             do {
-                let histryData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
-
-
-                }catch let error as NSError {
-                     print("ファイル読み込みに失敗。\n \(error)")
-            } //Do節ここまで
+                try textData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+            }catch {
+            }
+            return
+        } //guard節ここまで
         
+        //ファイル読込
+        do {
+            let histryData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+            }catch let error as NSError {
+            print("ファイル読み込みに失敗。\n \(error)")
+        } //Do節ここまで
+print("histryData1:\(histryData)")
         //今回の履歴を追加する
-        histryData.append(histryStr)//今回の履歴を追加
-        //履歴ファイルを保存する
+        histryData.append(histryStr)//今回の履歴を追加する
         
+        //履歴ファイルを保存する
+        do {
+            try histryData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+        }catch {
+        }
+print("histryData2:\(histryData)")
+
+        return
         
         
         
