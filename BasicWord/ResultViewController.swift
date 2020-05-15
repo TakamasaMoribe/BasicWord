@@ -33,30 +33,68 @@ class ResultViewController: UIViewController {
     }
     // end of  override func viewDidLoad()  --------------------------
 
-    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）
+    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝
     func showHistory()  {
-        let singleton:Singleton = Singleton.sharedInstance //ファイル名用のシングルトン
-        let filename = singleton.getItem() //ファイル名を読み込む
+        //１回分の履歴データ文字列
+        var historyStr:String = ""
         
-        var historyData:String = "" //正解率
-        historyData = String(correctPercentLabel.text!)
-
-         //現在の日付を取得
+        //現在の日付を取得
         let formatter = DateFormatter() //表示形式の指定
         formatter.dateStyle = .short    //短い表記
         formatter.timeStyle = .short    //短い表記
         formatter.locale = Locale(identifier: "ja_JP")//日本式
-
-        let now = Date() //現在の日時を取得
+        let now = Date()          //現在の日時を取得
         var timeData:String = ""
         timeData = String(formatter.string(from:now))
         timeData = String(timeData.suffix(11))//後ろから11文字取り出す
+
+        //ファイル名の取得
+        let singleton:Singleton = Singleton.sharedInstance
+        let filename = singleton.getItem() //ファイル名を読み込む
         
-        historyTextView.text = timeData + "  " + filename + "  " + historyData
+        //正解率の取得
+        var correctRate:String = "" //正解率
+        correctRate = String(correctPercentLabel.text!)
+        
+        //１回分の履歴文字列をつくる
+        historyStr = timeData + "    " + filename + "    " + correctRate
+        
+        //テキストビューに表示
+        historyTextView.text = historyStr
     }
+    // end of  func showHistory()  -----------------------------------
+
     
+    //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    func saveHistory(histryStr:String)  {
+        
+        var histryData:String = "" //履歴データを入れる文字列の初期化
+        
+        //既存の履歴ファイルを読み込む。まだなければ新しくつくる
+        
+        //データの読み込み　準備
+        let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
+
+            do {
+                let histryData = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+
+
+                }catch let error as NSError {
+                     print("ファイル読み込みに失敗。\n \(error)")
+            } //Do節ここまで
+        
+        //今回の履歴を追加する
+        histryData.append(histryStr)//今回の履歴を追加
+        //履歴ファイルを保存する
+        
+        
+        
+        
+    }
+    // end of  saveHistory(histryStr:String)  ------------------------
+
     
-    //次画面に移る前の処理 -----------------------------------------------
+    //次画面に移る前の処理 （セグエを利用して、スタート画面に戻る）＝＝＝＝＝＝＝＝＝
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //UserDefaultsStandardにいくつかの値を保存しておく
         let defaults = UserDefaults.standard
