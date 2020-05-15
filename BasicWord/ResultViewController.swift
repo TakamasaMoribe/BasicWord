@@ -35,10 +35,24 @@ class ResultViewController: UIViewController {
 
     //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）
     func showHistory()  {
+        let singleton:Singleton = Singleton.sharedInstance //ファイル名用のシングルトン
+        let filename = singleton.getItem() //ファイル名を読み込む
         
-        historyTextView.text = "日付時刻"+"ファイル名"+"正解率"
+        var historyData:String = "" //正解率
+        historyData = String(correctPercentLabel.text!)
+
+         //現在の日付を取得
+        let formatter = DateFormatter() //表示形式の指定
+        formatter.dateStyle = .short    //短い表記
+        formatter.timeStyle = .short    //短い表記
+        formatter.locale = Locale(identifier: "ja_JP")//日本式
+
+        let now = Date() //現在の日時を取得
+        var timeData:String = ""
+        timeData = String(formatter.string(from:now))
+        timeData = String(timeData.suffix(11))//後ろから11文字取り出す
         
-        
+        historyTextView.text = timeData + "  " + filename + "  " + historyData
     }
     
     
