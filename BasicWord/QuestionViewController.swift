@@ -36,21 +36,21 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var trueAnswer: UILabel!          //不正解の時、正解を示す hide属性
     @IBOutlet weak var nextQuestionButton: UIButton! //次の問題へ進むボタン　 hide
     
-        @IBOutlet weak var button: UIButton!//ためし　ボタンの装飾
-        
+        @IBOutlet weak var button1: UIButton! //選択肢ボタンの装飾
+        @IBOutlet weak var button2: UIButton! //
+        @IBOutlet weak var button3: UIButton! //
+        @IBOutlet weak var button4: UIButton! //
+    
+    
         
     override func viewDidLoad() {
             super.viewDidLoad()
         
-        // ボタンの装飾　ためし
-        let rgba = UIColor(red: 255/255, green: 128/255, blue: 168/255, alpha: 1.0) // ボタン背景色設定
-        button.backgroundColor = rgba                                               // 背景色
-        button.layer.borderWidth = 0.5                                              // 枠線の幅
-        button.layer.borderColor = UIColor.black.cgColor                            // 枠線の色
-        button.layer.cornerRadius = 5.0                                             // 角丸のサイズ
-        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
-
-        
+        // ボタンの装飾
+            designButton(buttonObj: button1!) //選択肢１ボタンの装飾
+            designButton(buttonObj: button2!) //
+            designButton(buttonObj: button3!) //
+            designButton(buttonObj: button4!) //
         
         //問題数と出題順の取得  sharedInstance.questionDataArray****　次の問題へ進むたびにここに戻って画面表示をする
         let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count//問題の総数
@@ -93,6 +93,18 @@ class QuestionViewController: UIViewController {
     }
     // end of override func viewDidLoad() ------------------------------------------------
 
+    
+//ボタンの装飾
+    func designButton(buttonObj:UIButton)  {
+        let button:UIButton = buttonObj //buttonにbuttonObjを設定する
+        let rgba = UIColor(red: 150/255, green: 200/255, blue: 50/255, alpha: 1.0) // ボタン背景色設定
+        button.backgroundColor = rgba                                               // 背景色
+        button.layer.borderWidth = 0.5                                              // 枠線の幅
+        button.layer.borderColor = UIColor.black.cgColor                            // 枠線の色
+        button.layer.cornerRadius = 2.0                                             // 角丸のサイズ
+        button.setTitleColor(UIColor.white, for: UIControl.State.normal)            // タイトルの色
+    }
+    
     
     //選択肢１を選んだ時
      @IBAction func tapAnswer1Button(_ sender: Any) {
