@@ -12,7 +12,7 @@ class ResultViewController: UIViewController {
            
     @IBOutlet weak var correctPercentLabel: UILabel! //正解率表示用ラベル
     
-    @IBOutlet weak var historyTextView: UITextView! //成績履歴表示用テキストビュー
+    @IBOutlet weak var historyTextView: UITextView!  //成績履歴表示用テキストビュー
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,18 +27,18 @@ class ResultViewController: UIViewController {
         correctPercentLabel.text = String(format: "%.1f", correctPercent) + "%"
         //表示後　正解数(correctCount)をクリアしておく
         QuestionDataManager.sharedInstance.correctCount = 0
-        
-        showHistory()//成績履歴の表示
+        //成績履歴の表示
+        showHistory()
         
     }
     // end of  override func viewDidLoad()  --------------------------
 
     
-    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝＝＝＝＝
+    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     func showHistory()  {
         
         var historyData:String = "" //成績履歴データ全体
-        var nowResult:String = "" //今回１回分の成績データ文字列
+        var nowResult:String = ""   //今回１回分の成績データ文字列
         
         //現在の日付を取得
         let formatter = DateFormatter() //表示形式の指定
@@ -48,25 +48,16 @@ class ResultViewController: UIViewController {
         let now = Date()          //現在の日時を取得
         var timeData:String = ""
         timeData = String(formatter.string(from:now))
-print(timeData)
-        //１０時の前後で桁数を変える
- //       timeData = String(timeData.suffix(11))//後ろから11文字取り出す １０時の前後で桁数がちがう
-
-        var timeStr:String
-        timeStr = String(timeData.suffix(5))//後ろから５文字取り出す
-print(timeStr)
-        timeStr = String(timeStr.prefix(2))//さらにそのうち、前から２文字取り出す
-print("timeStr:\(timeStr)")
-        var timeVal:Int
-        timeVal = Int(timeStr)!
-print("timeVal:\(timeVal)")
-        
-        if timeVal<10 {
-            timeData = String(timeData.suffix(10))//後ろから11文字取り出す １０時の前後で桁数がちがう
-        }else{
-            timeData = String(timeData.suffix(11))//後ろから11文字取り出す １０時の前後で桁数がちが
-        }
-
+            var timeStr:String   //時刻を取り出す文字列
+            var timeValue:Int    //時刻を示す数値
+            timeStr = String(timeData.suffix(5)) //後ろから５文字取り出す（何時：何分）
+            timeStr = String(timeStr.prefix(2))  //さらにそのうち、前から２文字（何時）
+            timeValue = Int(timeStr)!            //数値にして比較する
+                if timeValue<10 {                //１０時よりも前の時刻
+                    timeData = String(timeData.suffix(10)) //後ろから1０文字
+                }else{
+                    timeData = String(timeData.suffix(11)) //後ろから１１文字
+                }
 
         //ファイル名の取得・・・ファイル名が問題の種類を表している
         let singleton:Singleton = Singleton.sharedInstance
@@ -92,8 +83,8 @@ print("timeVal:\(timeVal)")
         
         //過去の履歴データファイルの読み込み　準備
         let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
-        var tempText:String = "" //履歴データテキストを読み込む一時使用文字列
-        var historyData:String = "" //履歴データを返す文字列
+        var tempText:String = ""    //履歴データテキストを読み込む一時使用文字列
+        var historyData:String = "" //履歴データを呼び出し元へ返す文字列
         
         //既存の履歴ファイルを読み込む。
         //ファイルマネージャーを使って、ファイルの有無を調べる
@@ -117,7 +108,7 @@ print("timeVal:\(timeVal)")
         } //Do節ここまで
         
 //tempText = ""//履歴の消去
-       historyData = nowResult //今回の成績を履歴データに入れる
+       historyData = nowResult      //今回の成績を履歴データに入れる
        historyData.append(tempText) //今回の成績に、過去の履歴(tempText)を追加する
         
         //履歴ファイルを保存する
