@@ -277,12 +277,11 @@
                                     <segue destination="F97-J9-76U" kind="unwind" unwindAction="goToTitle:" id="Kjt-3K-zhB"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="成績履歴の表示                  （日付時刻　ファイル名　正解率）" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1H3-3V-Z5q">
-                                <rect key="frame" x="43" y="237" width="293" height="233"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="成績履歴の表示                           （日付時刻　ファイル名　正解率）" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1H3-3V-Z5q">
+                                <rect key="frame" x="32" y="237" width="315" height="281"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xNl-p4-e5N">
@@ -312,9 +311,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="oc1-Ux-nhU" firstAttribute="bottom" secondItem="tJD-n6-RdX" secondAttribute="bottom" constant="73" id="7Os-ih-K8t"/>
+                            <constraint firstItem="tJD-n6-RdX" firstAttribute="top" secondItem="1H3-3V-Z5q" secondAttribute="bottom" constant="40" id="Ay7-k3-HHm"/>
                             <constraint firstItem="tJD-n6-RdX" firstAttribute="leading" secondItem="oc1-Ux-nhU" secondAttribute="leading" constant="116" id="FcO-bN-Uxp"/>
+                            <constraint firstItem="1H3-3V-Z5q" firstAttribute="top" secondItem="xNl-p4-e5N" secondAttribute="bottom" constant="19" id="Mil-9J-EPO"/>
+                            <constraint firstItem="oc1-Ux-nhU" firstAttribute="trailing" secondItem="1H3-3V-Z5q" secondAttribute="trailing" constant="28" id="TjC-Du-82Q"/>
                             <constraint firstItem="oc1-Ux-nhU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tJD-n6-RdX" secondAttribute="trailing" symbolic="YES" id="chJ-rC-Ki3"/>
                             <constraint firstItem="xNl-p4-e5N" firstAttribute="centerX" secondItem="1Dd-f9-Eko" secondAttribute="centerX" id="vAJ-iA-gxX"/>
+                            <constraint firstItem="1H3-3V-Z5q" firstAttribute="leading" secondItem="oc1-Ux-nhU" secondAttribute="leading" constant="32" id="yiM-8D-Q4X"/>
                             <constraint firstItem="xNl-p4-e5N" firstAttribute="top" secondItem="oc1-Ux-nhU" secondAttribute="top" constant="54" id="yje-fn-voZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oc1-Ux-nhU"/>

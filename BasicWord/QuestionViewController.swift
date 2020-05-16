@@ -200,7 +200,7 @@ class QuestionViewController: UIViewController {
         let listArray = QuestionDataManager.sharedInstance.questionDataArray //一時的な問題データ配列
         let questionCount = QuestionDataManager.sharedInstance.questionDataArray.count//問題数
         
-        //配列をCSVファイルに変換する
+        //配列をCSVファイルに変換する。１問ごとに改行をする
         var csvString = ""
         var item = ""
 
