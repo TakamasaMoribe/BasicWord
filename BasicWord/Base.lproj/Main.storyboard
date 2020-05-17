@@ -307,6 +307,13 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkJ-Ex-xOG">
+                                <rect key="frame" x="32" y="561" width="62" height="30"/>
+                                <state key="normal" title="履歴消去"/>
+                                <connections>
+                                    <action selector="historyClearButtonTap:" destination="BcJ-Wl-XcG" eventType="touchUpInside" id="KGU-SH-iHc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -315,7 +322,9 @@
                             <constraint firstItem="tJD-n6-RdX" firstAttribute="leading" secondItem="oc1-Ux-nhU" secondAttribute="leading" constant="116" id="FcO-bN-Uxp"/>
                             <constraint firstItem="1H3-3V-Z5q" firstAttribute="top" secondItem="xNl-p4-e5N" secondAttribute="bottom" constant="19" id="Mil-9J-EPO"/>
                             <constraint firstItem="oc1-Ux-nhU" firstAttribute="trailing" secondItem="1H3-3V-Z5q" secondAttribute="trailing" constant="28" id="TjC-Du-82Q"/>
+                            <constraint firstItem="gkJ-Ex-xOG" firstAttribute="leading" secondItem="oc1-Ux-nhU" secondAttribute="leading" constant="32" id="cbe-LV-esQ"/>
                             <constraint firstItem="oc1-Ux-nhU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tJD-n6-RdX" secondAttribute="trailing" symbolic="YES" id="chJ-rC-Ki3"/>
+                            <constraint firstItem="gkJ-Ex-xOG" firstAttribute="bottom" secondItem="tJD-n6-RdX" secondAttribute="bottom" constant="-3" id="inJ-cQ-P1O"/>
                             <constraint firstItem="xNl-p4-e5N" firstAttribute="centerX" secondItem="1Dd-f9-Eko" secondAttribute="centerX" id="vAJ-iA-gxX"/>
                             <constraint firstItem="1H3-3V-Z5q" firstAttribute="leading" secondItem="oc1-Ux-nhU" secondAttribute="leading" constant="32" id="yiM-8D-Q4X"/>
                             <constraint firstItem="xNl-p4-e5N" firstAttribute="top" secondItem="oc1-Ux-nhU" secondAttribute="top" constant="54" id="yje-fn-voZ"/>

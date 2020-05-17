@@ -27,14 +27,20 @@ class ResultViewController: UIViewController {
         correctPercentLabel.text = String(format: "%.1f", correctPercent) + "%"
         //表示後　正解数(correctCount)をクリアしておく
         QuestionDataManager.sharedInstance.correctCount = 0
-        //成績履歴の表示
+        //成績履歴の表示　とりあえず履歴の個数を２０にしてみる
         showHistory()
         
     }
     // end of  override func viewDidLoad()  --------------------------
 
     
-    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //履歴の消去　ファイルの内容も消去する
+    @IBAction func historyClearButtonTap(_ sender: Any) {
+        clearHistory()
+    }
+    
+    
+    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝履歴の個数を２０＝＝
     func showHistory()  {
         
         var historyData:String = "" //成績履歴データ全体
@@ -120,6 +126,52 @@ class ResultViewController: UIViewController {
         
     }
     // end of  saveHistory(nowResult:String)  --------------------------------------
+    
+    
+   //履歴をクリアする　　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    func clearHistory()  {
+        //過去の履歴データファイルの読み込み　準備
+        let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
+//        var tempText:String = ""    //履歴データテキストを読み込む一時使用文字列
+        var historyData:String = "" //履歴データを呼び出し元へ返す文字列
+                
+//        //既存の履歴ファイルを読み込む。
+//        //ファイルマネージャーを使って、ファイルの有無を調べる
+//                let fileManager = FileManager.default
+//                guard (fileManager.fileExists(atPath: thePath)) else {
+//                    //指定のファイルがなければ、新しくつくる
+//                    let textData:String = ""
+//                    do {
+//                        try textData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+//                    }catch {
+//                    }
+//                    return
+//                } //guard節ここまで
+//
+//        //過去の履歴データファイル読込  tempTextとして取り出す
+//                do {
+//                    let text = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
+//                    tempText = text   //取り出したテキストデータをtempTextに入れる
+//                    }catch let error as NSError {
+//                    print("ファイル読み込みに失敗。\n \(error)")
+//                } //Do節ここまで
+//
+//        tempText = ""//履歴の消去
+        historyData = ""
+                
+                //履歴ファイルを保存する
+                do {
+                    try historyData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+                }catch {
+                }
+                return
+        
+        //テキストビューのクリア
+        historyTextView.text = historyData //全部の履歴の表示
+
+        
+    }
+    // end of  clearHistory()  --------------------------------------
 
     
     //次画面に移る前の処理 （セグエを利用して、スタート画面に戻る）＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
