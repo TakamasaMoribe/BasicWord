@@ -308,7 +308,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkJ-Ex-xOG">
-                                <rect key="frame" x="32" y="561" width="62" height="30"/>
+                                <rect key="frame" x="32" y="561" width="64" height="30"/>
                                 <state key="normal" title="履歴消去"/>
                                 <connections>
                                     <action selector="historyClearButtonTap:" destination="BcJ-Wl-XcG" eventType="touchUpInside" id="KGU-SH-iHc"/>
@@ -319,6 +319,7 @@
                         <constraints>
                             <constraint firstItem="oc1-Ux-nhU" firstAttribute="bottom" secondItem="tJD-n6-RdX" secondAttribute="bottom" constant="73" id="7Os-ih-K8t"/>
                             <constraint firstItem="tJD-n6-RdX" firstAttribute="top" secondItem="1H3-3V-Z5q" secondAttribute="bottom" constant="40" id="Ay7-k3-HHm"/>
+                            <constraint firstItem="tJD-n6-RdX" firstAttribute="leading" secondItem="gkJ-Ex-xOG" secondAttribute="trailing" constant="20" id="EoU-9P-FAu"/>
                             <constraint firstItem="tJD-n6-RdX" firstAttribute="leading" secondItem="oc1-Ux-nhU" secondAttribute="leading" constant="116" id="FcO-bN-Uxp"/>
                             <constraint firstItem="1H3-3V-Z5q" firstAttribute="top" secondItem="xNl-p4-e5N" secondAttribute="bottom" constant="19" id="Mil-9J-EPO"/>
                             <constraint firstItem="oc1-Ux-nhU" firstAttribute="trailing" secondItem="1H3-3V-Z5q" secondAttribute="trailing" constant="28" id="TjC-Du-82Q"/>

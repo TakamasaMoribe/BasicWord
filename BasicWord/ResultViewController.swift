@@ -113,7 +113,6 @@ class ResultViewController: UIViewController {
             print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
         
-//tempText = ""//履歴の消去
        historyData = nowResult      //今回の成績を履歴データに入れる
        historyData.append(tempText) //今回の成績に、過去の履歴(tempText)を追加する
         
@@ -132,44 +131,14 @@ class ResultViewController: UIViewController {
     func clearHistory()  {
         //過去の履歴データファイルの読み込み　準備
         let thePath = NSHomeDirectory()+"/Documents/historyFile.txt"
-//        var tempText:String = ""    //履歴データテキストを読み込む一時使用文字列
-        var historyData:String = "" //履歴データを呼び出し元へ返す文字列
-                
-//        //既存の履歴ファイルを読み込む。
-//        //ファイルマネージャーを使って、ファイルの有無を調べる
-//                let fileManager = FileManager.default
-//                guard (fileManager.fileExists(atPath: thePath)) else {
-//                    //指定のファイルがなければ、新しくつくる
-//                    let textData:String = ""
-//                    do {
-//                        try textData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
-//                    }catch {
-//                    }
-//                    return
-//                } //guard節ここまで
-//
-//        //過去の履歴データファイル読込  tempTextとして取り出す
-//                do {
-//                    let text = try String(contentsOfFile: thePath, encoding: String.Encoding.utf8)
-//                    tempText = text   //取り出したテキストデータをtempTextに入れる
-//                    }catch let error as NSError {
-//                    print("ファイル読み込みに失敗。\n \(error)")
-//                } //Do節ここまで
-//
-//        tempText = ""//履歴の消去
-        historyData = ""
-                
-                //履歴ファイルを保存する
-                do {
-                    try historyData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
-                }catch {
-                }
-                return
-        
-        //テキストビューのクリア
-        historyTextView.text = historyData //全部の履歴の表示
-
-        
+        let historyData:String = "" //履歴データを呼び出し元へ返す文字列
+            //クリアした履歴ファイルを保存する
+            do {
+                try historyData.write(toFile:thePath,atomically:true,encoding:String.Encoding.utf8)
+            }catch {
+            }
+            return
+        historyTextView.text = historyData //履歴をクリアしたテキストビューの表示
     }
     // end of  clearHistory()  --------------------------------------
 
