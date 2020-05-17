@@ -40,7 +40,7 @@ class ResultViewController: UIViewController {
     }
     
     
-    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝履歴の個数を２０＝＝
+    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝履歴の個数を２０？＝＝
     func showHistory()  {
         
         var historyData:String = "" //成績履歴データ全体
@@ -77,14 +77,17 @@ class ResultViewController: UIViewController {
         nowResult = timeData + "    " + filename + "    " + correctRate + "\n" //改行
         
         //履歴をテキストビューに表示
-        historyData = saveHistory(nowResult:nowResult) //過去の履歴を追加する
+        historyData = saveHistory(nowResult:nowResult) //過去の履歴を追加して保存する
         historyTextView.text = historyData //全部の履歴の表示
+        
+print(historyData.count)//１つで３０
+
 
     }
     // end of  func showHistory()  ----------------------------------------------------
 
     
-    //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝履歴の消去は手動でできるが
+    //履歴を既存のファイルに保存する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     func saveHistory(nowResult:String) -> String {
         
         //過去の履歴データファイルの読み込み　準備
@@ -113,8 +116,14 @@ class ResultViewController: UIViewController {
             print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
         
-       historyData = nowResult      //今回の成績を履歴データに入れる
-       historyData.append(tempText) //今回の成績に、過去の履歴(tempText)を追加する
+  //過去の履歴の数を、とりあえず５つまでにしてみる
+print(tempText)
+        var limitedText:String = ""
+        limitedText = historyLimit(text: tempText) //historyLimit()メソッド
+        
+        
+       historyData = nowResult         //先に今回の成績を履歴データに入れる
+       historyData.append(limitedText) //今回の成績に、過去の履歴(limitedText)を追加する
         
         //履歴ファイルを保存する
         do {
@@ -125,6 +134,27 @@ class ResultViewController: UIViewController {
         
     }
     // end of  saveHistory(nowResult:String)  --------------------------------------
+
+    
+    //履歴の回数を制限する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    func historyLimit(text:String) -> String {
+        //１回分の履歴文字列の長さ（文字数）は３０なので、それを使う
+        var limitedText:String = ""//限られた長さの文字列として返す
+        var historycount:Int = 0 //履歴の回数
+        let length:Int = 30 //１回の履歴の文字列は３０文字
+        historycount = Int(text.count / length)
+print("historycount1:\(historycount)")
+            if historycount > 5 {//５回を超えた場合
+                //前から１５０文字を切り取って残す（呼び出し元へ返す）
+                limitedText = String(text.prefix(150))//前から１５０文字
+print("limitedText:\(limitedText)")
+print("limitedText:\(limitedText.count)")
+
+            }
+print("historycount2:\(historycount)")
+      return limitedText
+    }
+    // end of  historyLimit(text:String)  --------------------------------------
     
     
    //履歴をクリアする　　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
