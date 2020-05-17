@@ -35,11 +35,23 @@ class QuestionViewController: UIViewController {
         
     @IBOutlet weak var trueAnswer: UILabel!          //不正解の時、正解を示す hide属性
     @IBOutlet weak var nextQuestionButton: UIButton! //次の問題へ進むボタン　 hide
-        
+    
+        @IBOutlet weak var button1: UIButton! //選択肢ボタンの装飾
+        @IBOutlet weak var button2: UIButton! //
+        @IBOutlet weak var button3: UIButton! //
+        @IBOutlet weak var button4: UIButton! //
+    
+    
         
     override func viewDidLoad() {
             super.viewDidLoad()
-            
+        
+        // ボタンの装飾
+            designButton(buttonObj: button1!) //選択肢１ボタンの装飾
+            designButton(buttonObj: button2!) //
+            designButton(buttonObj: button3!) //
+            designButton(buttonObj: button4!) //
+        
         //問題数と出題順の取得  sharedInstance.questionDataArray****　次の問題へ進むたびにここに戻って画面表示をする
         let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count//問題の総数
         var nowQuestionNo = questionData.questionNo //現在の出題順　
@@ -81,6 +93,18 @@ class QuestionViewController: UIViewController {
     }
     // end of override func viewDidLoad() ------------------------------------------------
 
+    
+//ボタンの装飾
+    func designButton(buttonObj:UIButton)  {
+        let button:UIButton = buttonObj //buttonに引数buttonObjを設定する
+        let rgba = UIColor(red: 50/255, green: 255/255, blue: 0/255, alpha: 0.3) // ボタン背景色設定
+        button.backgroundColor = rgba                                               // 背景色
+        button.layer.borderWidth = 0.5                                              // 枠線の幅
+        button.layer.borderColor = UIColor.black.cgColor                            // 枠線の色
+        button.layer.cornerRadius = 2.0                                             // 角丸のサイズ
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)            // タイトルの色
+    }
+    
     
     //選択肢１を選んだ時
      @IBAction func tapAnswer1Button(_ sender: Any) {
@@ -176,7 +200,7 @@ class QuestionViewController: UIViewController {
         let listArray = QuestionDataManager.sharedInstance.questionDataArray //一時的な問題データ配列
         let questionCount = QuestionDataManager.sharedInstance.questionDataArray.count//問題数
         
-        //配列をCSVファイルに変換する
+        //配列をCSVファイルに変換する。１問ごとに改行をする
         var csvString = ""
         var item = ""
 
