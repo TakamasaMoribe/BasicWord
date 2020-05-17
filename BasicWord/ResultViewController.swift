@@ -34,9 +34,9 @@ class ResultViewController: UIViewController {
     // end of  override func viewDidLoad()  --------------------------
 
     
-    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率） 何回分保存するか＝＝＝＝＝＝＝＝＝＝
     func showHistory()  {
-        
+    
         var historyData:String = "" //成績履歴データ全体
         var nowResult:String = ""   //今回１回分の成績データ文字列
         
