@@ -79,9 +79,6 @@ class ResultViewController: UIViewController {
         //履歴をテキストビューに表示
         historyData = saveHistory(nowResult:nowResult) //過去の履歴を追加して保存する
         historyTextView.text = historyData //全部の履歴の表示
-        
-print(historyData.count)//１つで３０
-
 
     }
     // end of  func showHistory()  ----------------------------------------------------
@@ -116,14 +113,12 @@ print(historyData.count)//１つで３０
             print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
         
-  //過去の履歴の数を、とりあえず５つまでにしてみる
-print(tempText)
-        var limitedText:String = ""
+       //過去の履歴の数を、とりあえず５つまでにしてみる
+        var limitedText:String = "" //制限した長さの履歴文字列
         limitedText = historyLimit(text: tempText) //historyLimit()メソッド
         
-        
-       historyData = nowResult         //先に今回の成績を履歴データに入れる
-       historyData.append(limitedText) //今回の成績に、過去の履歴(limitedText)を追加する
+        historyData = nowResult         //先に今回の成績を履歴データに入れる
+        historyData.append(limitedText) //今回の成績に、過去の履歴(limitedText)を追加する
         
         //履歴ファイルを保存する
         do {
@@ -139,20 +134,20 @@ print(tempText)
     //履歴の回数を制限する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     func historyLimit(text:String) -> String {
         //１回分の履歴文字列の長さ（文字数）は３０なので、それを使う
-        var limitedText:String = ""//限られた長さの文字列として返す
-        var historycount:Int = 0 //履歴の回数
-        let length:Int = 30 //１回の履歴の文字列は３０文字
-        historycount = Int(text.count / length)
-print("historycount1:\(historycount)")
-            if historycount > 5 {//５回を超えた場合
+        var limitedText:String = "" //制限した長さの文字列として返す
+        var historycount:Int = 0    //履歴の回数
+        let limitCount:Int = 20     //履歴の制限回数
+        var limitLength:Int         //履歴文字数を制限する長さ
+        let length:Int = 30         //１回の履歴の文字列は３０文字
+        limitLength = limitCount * length //履歴文字数を制限する長さ（６００文字）
+        historycount = Int(text.count / length) //履歴の回数
+            if historycount > limitCount { //limitCountを超えた場合（２０回）
                 //前から１５０文字を切り取って残す（呼び出し元へ返す）
-                limitedText = String(text.prefix(150))//前から１５０文字
-print("limitedText:\(limitedText)")
-print("limitedText:\(limitedText.count)")
-
+                limitedText = String(text.prefix(limitLength))//前から６００文字
+            } else {
+                limitedText = text //履歴が既定回数以内なのでそのまま
             }
-print("historycount2:\(historycount)")
-      return limitedText
+      return limitedText //制限した長さの文字列として返す
     }
     // end of  historyLimit(text:String)  --------------------------------------
     

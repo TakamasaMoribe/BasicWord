@@ -277,7 +277,7 @@
                                     <segue destination="F97-J9-76U" kind="unwind" unwindAction="goToTitle:" id="Kjt-3K-zhB"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="成績履歴の表示                           （日付時刻　ファイル名　正解率）" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1H3-3V-Z5q">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="5" maximumZoomScale="5" text="成績履歴の表示                           （日付時刻　ファイル名　正解率）" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1H3-3V-Z5q">
                                 <rect key="frame" x="32" y="237" width="315" height="281"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
