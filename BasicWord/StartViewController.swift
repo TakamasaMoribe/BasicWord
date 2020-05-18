@@ -14,7 +14,8 @@ class StartViewController: UIViewController {
 
     @IBOutlet weak var gradeSegment: UISegmentedControl! //学年名
     @IBOutlet weak var unitSegment: UISegmentedControl!  //単元名
-
+    @IBOutlet weak var retryButton: UIButton!
+    
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,25 @@ class StartViewController: UIViewController {
         gradeSegment.setTitleTextAttributes([NSAttributedString.Key.font: font1], for: .normal)
         let font2 = UIFont.systemFont(ofSize: 18)//分野選択
         unitSegment.setTitleTextAttributes([NSAttributedString.Key.font: font2], for: .normal)
+        
+ 
+        
     }
-
+   // end of  override func viewDidLoad()  -------------------------------------------------
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //再開フラグを読み込み、「中断からの再開」ボタンの表示を決める
+         let defaults = UserDefaults.standard
+         let restartFlag = defaults.bool(forKey: "restartFlag")
+             if restartFlag == true {
+                 retryButton.isHidden = false//中断後の再開フラグがtrueのときは、表示する
+             }else{
+                 retryButton.isHidden = true//中断語ではないときは、非表示のままにしておく
+         }
+        //ボタンを押したならば、非表示にする
+    }
+   // end of  override func viewWillAppear()  -------------------------------------------------
+    
     
     //次画面に移る前の処理
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,9 +90,12 @@ class StartViewController: UIViewController {
     
     
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//再開ボタンを押した時
+//「中断からの再開」ボタンを押した時
 // 保存した問題データと、UserDefaultsに保存した問題進行を読み込む
     @IBAction func clickRetryButton(_ sender: Any) {
+        
+    //「中断からの再開」ボタンを非表示に戻しておく
+        retryButton.isHidden = true//中断語ではないときは、非表示のままにしておく
 
     //問題を格納するための配列 questionDataArray = [QuestionData]() //QuestionDataの型
     QuestionDataManager.sharedInstance.questionDataArray = []//初期化してみる

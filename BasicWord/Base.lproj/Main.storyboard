@@ -64,7 +64,7 @@
                                     <segue destination="e0J-VL-fUi" kind="presentation" id="6m7-QJ-lNR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enI-V2-Szf">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enI-V2-Szf">
                                 <rect key="frame" x="116" y="579" width="143" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="中断からの再開"/>
@@ -98,6 +98,7 @@
                     </view>
                     <connections>
                         <outlet property="gradeSegment" destination="LQm-v9-r5c" id="Cei-V2-1J9"/>
+                        <outlet property="retryButton" destination="enI-V2-Szf" id="WHH-oR-b7y"/>
                         <outlet property="unitSegment" destination="zto-mG-BnU" id="zIh-eE-SeJ"/>
                     </connections>
                 </viewController>
