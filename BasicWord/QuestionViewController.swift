@@ -88,6 +88,8 @@ class QuestionViewController: UIViewController {
         //解答の進行状況を表示する プログレスビューの表示
         var degree:Float = 0.0 //進み具合
         degree = Float(nowQuestionNo) / Float(totalNumberOfQuestions)
+        //太さ（高さ）を１０にする
+        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 10.0)
         progressView.progress = degree //progressView を動かす
             
     }
