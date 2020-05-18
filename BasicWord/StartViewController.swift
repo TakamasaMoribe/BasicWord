@@ -18,6 +18,11 @@ class StartViewController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
+        //セグメンティッドコントロールの装飾
+        let font1 = UIFont.systemFont(ofSize: 20)//学年選択
+        gradeSegment.setTitleTextAttributes([NSAttributedString.Key.font: font1], for: .normal)
+        let font2 = UIFont.systemFont(ofSize: 18)//分野選択
+        unitSegment.setTitleTextAttributes([NSAttributedString.Key.font: font2], for: .normal)
     }
 
     
