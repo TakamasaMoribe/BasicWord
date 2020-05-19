@@ -27,7 +27,7 @@ class StartViewController: UIViewController {
             }else{
                    retryButton.isHidden = true//中断後ではないときは、非表示のままにしておく
             }
-          //このあとの処理で、ボタンを押したならば、非表示にする　(retryButton.isHidden = false)
+          //このあとの処理で、再開ボタンを押したならば、非表示にする　(retryButton.isHidden = true)
         
       }
      // end of  override func viewWillAppear()  -------------------------------------------------

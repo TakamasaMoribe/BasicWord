@@ -36,7 +36,7 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var trueAnswer: UILabel!          //不正解の時、正解を示す hide属性
     @IBOutlet weak var nextQuestionButton: UIButton! //次の問題へ進むボタン　 hide
     
-        @IBOutlet weak var button1: UIButton! //選択肢ボタンの装飾
+        @IBOutlet weak var button1: UIButton! //選択肢ボタン装飾のため
         @IBOutlet weak var button2: UIButton! //
         @IBOutlet weak var button3: UIButton! //
         @IBOutlet weak var button4: UIButton! //
@@ -45,6 +45,12 @@ class QuestionViewController: UIViewController {
         
     override func viewDidLoad() {
             super.viewDidLoad()
+        
+        //テキストビューの装飾
+        let view = questionTextView! //UIView()
+        view.layer.borderColor = UIColor.black.cgColor// 枠線の色
+        view.layer.borderWidth = 2// 枠線の太さ
+        view.layer.cornerRadius = 5// 面取り
         
         // ボタンの装飾
             designButton(buttonObj: button1!) //選択肢１ボタンの装飾
@@ -73,7 +79,6 @@ class QuestionViewController: UIViewController {
             } else {
                 //現在の問題番号を取得する
                 nowQuestionNo = QuestionDataManager.sharedInstance.nowQuestionIndex
-                
             }
         
         //初期データ設定。前画面から受け取ったquestionDataから値を取り出す
@@ -88,8 +93,8 @@ class QuestionViewController: UIViewController {
         //解答の進行状況を表示する プログレスビューの表示
         var degree:Float = 0.0 //進み具合
         degree = Float(nowQuestionNo) / Float(totalNumberOfQuestions)
-        //太さ（高さ）を１０にする
-        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 10.0)
+        //太さ（高さ）を５にする
+        progressView.transform = CGAffineTransform(scaleX: 1.0, y: 5.0)
         progressView.progress = degree //progressView を動かす
             
     }
@@ -100,11 +105,11 @@ class QuestionViewController: UIViewController {
     func designButton(buttonObj:UIButton)  {
         let button:UIButton = buttonObj //buttonに引数buttonObjを設定する
         let rgba = UIColor(red: 50/255, green: 255/255, blue: 0/255, alpha: 0.3) // ボタン背景色設定
-        button.backgroundColor = rgba                                               // 背景色
-        button.layer.borderWidth = 0.5                                              // 枠線の幅
-        button.layer.borderColor = UIColor.black.cgColor                            // 枠線の色
-        button.layer.cornerRadius = 2.0                                             // 角丸のサイズ
-        button.setTitleColor(UIColor.black, for: UIControl.State.normal)            // タイトルの色
+        button.backgroundColor = rgba                                     // 背景色
+        button.layer.borderWidth = 0.5                                    // 枠線の幅
+        button.layer.borderColor = UIColor.black.cgColor                  // 枠線の色
+        button.layer.cornerRadius = 2.0                                   // 角丸のサイズ
+        button.setTitleColor(UIColor.black, for: UIControl.State.normal)  // タイトルの色
     }
     
     
