@@ -41,8 +41,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zto-mG-BnU">
                                 <rect key="frame" x="63" y="374" width="249" height="32"/>
                                 <segments>
-                                    <segment title="植物"/>
-                                    <segment title="動物"/>
+                                    <segment title="生物"/>
+                                    <segment title="地学"/>
                                     <segment title="化学"/>
                                     <segment title="物理"/>
                                 </segments>
