@@ -40,7 +40,7 @@ class ResultViewController: UIViewController {
     }
     
     
-    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝履歴の個数を２０？＝＝
+    //成績履歴の表示（テキストビューに、日付時刻　ファイル名　正解率）＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     func showHistory()  {
         
         var historyData:String = "" //成績履歴データ全体
@@ -75,7 +75,7 @@ class ResultViewController: UIViewController {
         
         //１回分の履歴文字列をつくり、改行を追加する
         nowResult = timeData + "    " + filename + "    " + correctRate + "\n" //改行
-        
+                // "05/19 12:00   １年生物   100%" 11+3+8+3+4 = 29
         //履歴をテキストビューに表示
         historyData = saveHistory(nowResult:nowResult) //過去の履歴を追加して保存する
         historyTextView.text = historyData //全部の履歴の表示
@@ -113,7 +113,7 @@ class ResultViewController: UIViewController {
             print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
         
-       //過去の履歴の数を、とりあえず５つまでにしてみる
+       //過去の履歴の読込
         var limitedText:String = "" //制限した長さの履歴文字列
         limitedText = historyLimit(text: tempText) //historyLimit()メソッド
         
@@ -139,6 +139,7 @@ class ResultViewController: UIViewController {
         let limitCount:Int = 20     //履歴の制限回数
         var limitLength:Int         //履歴文字数を制限する長さ
         let length:Int = 30         //１回の履歴の文字列は３０文字
+
         limitLength = limitCount * length //履歴文字数を制限する長さ（６００文字）
         historycount = Int(text.count / length) //履歴の回数
             if historycount > limitCount { //limitCountを超えた場合（２０回）
