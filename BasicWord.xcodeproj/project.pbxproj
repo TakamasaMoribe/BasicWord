@@ -15,6 +15,7 @@
 		7F19F086247383F800F9F7F7 /* ３年物理.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F19F082247383F800F9F7F7 /* ３年物理.csv */; };
 		7F19F087247383F800F9F7F7 /* ３年地学.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F19F083247383F800F9F7F7 /* ３年地学.csv */; };
 		7F19F088247383F800F9F7F7 /* ３年化学.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F19F084247383F800F9F7F7 /* ３年化学.csv */; };
+		7F19F0922473C2C600F9F7F7 /* １年地学.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7F19F0912473C2C600F9F7F7 /* １年地学.csv */; };
 		7F5CD929245A46EF00056376 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD928245A46EF00056376 /* AppDelegate.swift */; };
 		7F5CD92B245A46EF00056376 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5CD92A245A46EF00056376 /* SceneDelegate.swift */; };
 		7F5CD930245A46EF00056376 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F5CD92E245A46EF00056376 /* Main.storyboard */; };
@@ -44,7 +45,7 @@
 		7F19F082247383F800F9F7F7 /* ３年物理.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "３年物理.csv"; sourceTree = "<group>"; };
 		7F19F083247383F800F9F7F7 /* ３年地学.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "３年地学.csv"; sourceTree = "<group>"; };
 		7F19F084247383F800F9F7F7 /* ３年化学.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "３年化学.csv"; sourceTree = "<group>"; };
-		7F19F08A2473BB7B00F9F7F7 /* １年地学.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = "１年地学.csv"; sourceTree = "<group>"; };
+		7F19F0912473C2C600F9F7F7 /* １年地学.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "１年地学.csv"; path = "../../../Desktop/１年地学.csv"; sourceTree = "<group>"; };
 		7F5CD925245A46EF00056376 /* BasicWord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicWord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F5CD928245A46EF00056376 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F5CD92A245A46EF00056376 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +114,7 @@
 				7F5CD957245A97F100056376 /* １年植物.csv */,
 				7F5CD949245A97A300056376 /* １年動物.csv */,
 				7F5CD94B245A97A300056376 /* １年物理.csv */,
-				7F19F08A2473BB7B00F9F7F7 /* １年地学.csv */,
+				7F19F0912473C2C600F9F7F7 /* １年地学.csv */,
 				7F19F079247381E700F9F7F7 /* ２年生物.csv */,
 				7F19F07D247383E800F9F7F7 /* ２年化学.csv */,
 				7F19F07B247383E700F9F7F7 /* ２年地学.csv */,
@@ -208,6 +209,7 @@
 				7F5CD958245A97F100056376 /* １年植物.csv in Resources */,
 				7F5CD932245A46F400056376 /* Assets.xcassets in Resources */,
 				7F19F088247383F800F9F7F7 /* ３年化学.csv in Resources */,
+				7F19F0922473C2C600F9F7F7 /* １年地学.csv in Resources */,
 				7F5CD930245A46EF00056376 /* Main.storyboard in Resources */,
 				7F19F07A247381E700F9F7F7 /* ２年生物.csv in Resources */,
 				7F5CD951245A97A400056376 /* correct@2x.png in Resources */,
