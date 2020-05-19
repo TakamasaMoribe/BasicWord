@@ -14,37 +14,48 @@ class StartViewController: UIViewController {
 
     @IBOutlet weak var gradeSegment: UISegmentedControl! //学年名
     @IBOutlet weak var unitSegment: UISegmentedControl!  //単元名
-    @IBOutlet weak var retryButton: UIButton!
+    @IBOutlet weak var retryButton: UIButton!            //「中断からの再開」ボタン
+
     
-     
+    // 画面表示前の準備　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    override func viewWillAppear(_ animated: Bool) {
+        //再開フラグを読み込み、「中断からの再開」ボタンの表示を決める
+        let defaults = UserDefaults.standard
+        let restartFlag = defaults.bool(forKey: "restartFlag")
+            if restartFlag == true {
+                retryButton.isHidden = false//中断後の再開フラグがtrueのときは、表示する
+            }else{
+                   retryButton.isHidden = true//中断後ではないときは、非表示のままにしておく
+            }
+          //このあとの処理で、ボタンを押したならば、非表示にする　(retryButton.isHidden = false)
+        
+      }
+     // end of  override func viewWillAppear()  -------------------------------------------------
+
+    
+    // 画面表示後の処理　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     override func viewDidLoad() {
         super.viewDidLoad()
         //セグメンティッドコントロールの装飾
         let font1 = UIFont.systemFont(ofSize: 20)//学年選択
         gradeSegment.setTitleTextAttributes([NSAttributedString.Key.font: font1], for: .normal)
+        // セグメントの背景色の設定
+        gradeSegment.backgroundColor = UIColor(red: 0.00, green: 1.00, blue: 0.00, alpha: 0.2)
+        // 選択されたセグメントの背景色の設定
+        gradeSegment.selectedSegmentTintColor = UIColor(red: 1.00, green: 1.00, blue: 0.00, alpha: 1.0)
+        
         let font2 = UIFont.systemFont(ofSize: 18)//分野選択
         unitSegment.setTitleTextAttributes([NSAttributedString.Key.font: font2], for: .normal)
-        
- 
+        // セグメントの背景色の設定
+        unitSegment.backgroundColor = UIColor(red: 0.00, green: 1.00, blue: 0.00, alpha: 0.2)
+        // 選択されたセグメントの背景色の設定
+        unitSegment.selectedSegmentTintColor = UIColor(red: 1.00, green: 1.00, blue: 0.00, alpha: 1.0)
         
     }
-   // end of  override func viewDidLoad()  -------------------------------------------------
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //再開フラグを読み込み、「中断からの再開」ボタンの表示を決める
-         let defaults = UserDefaults.standard
-         let restartFlag = defaults.bool(forKey: "restartFlag")
-             if restartFlag == true {
-                 retryButton.isHidden = false//中断後の再開フラグがtrueのときは、表示する
-             }else{
-                 retryButton.isHidden = true//中断語ではないときは、非表示のままにしておく
-         }
-        //ボタンを押したならば、非表示にする
-    }
-   // end of  override func viewWillAppear()  -------------------------------------------------
-    
-    
-    //次画面に移る前の処理
+    // end of  override func viewDidLoad()  -------------------------------------------------
+
+        
+    //次画面に移る前の処理　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //セグメンティッドコントロールから問題ファイル名を取得する
