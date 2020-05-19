@@ -121,13 +121,9 @@ class StartViewController: UIViewController {
                 let questionData = QuestionData(questionSourceDataArray:questionSourceDataArray) //１行分の配列
                     QuestionDataManager.sharedInstance.questionDataArray.append(questionData)
                     //格納用の配列に、１行ずつ追加していく
-//questionData.questionNoが必要か？
-//問題番号を設定 =questionDataArrayに追加した順番を表す
-questionData.questionNo = QuestionDataManager.sharedInstance.questionDataArray.count//問題の累積数 １からの序数になる
+                    questionData.questionNo = QuestionDataManager.sharedInstance.questionDataArray.count//問題の累積数 １からの序数になる
                 }) //invokingからのクロージャここまで
 
-            
-            
             }catch let error as NSError {
                  print("ファイル読み込みに失敗。\n \(error)")
         } //Do節ここまで
@@ -137,9 +133,8 @@ questionData.questionNo = QuestionDataManager.sharedInstance.questionDataArray.c
     let defaults = UserDefaults.standard
     QuestionDataManager.sharedInstance.nowQuestionIndex = defaults.integer(forKey: "nowQuestionNo")
     //QuestionViewの画面で中断したときに、すでに次の問題が表示されているので１つ戻す
-    QuestionDataManager.sharedInstance.nowQuestionIndex -= 1//２回目の中断再開のときに−１になる？？？？
-        //一度、中断からの再開をしたときに、０になるか？？？？
-print("QuestionDataManager.sharedInstance.nowQuestionIndex:\(QuestionDataManager.sharedInstance.nowQuestionIndex)")
+    QuestionDataManager.sharedInstance.nowQuestionIndex -= 1
+ 
     //StoryboardのIdentifierに設定した値("question")を使って、ViewControllerを生成する
         if let nextQuestionViewController = storyboard?.instantiateViewController(identifier: "question") as? QuestionViewController {
             //問題文の取り出し

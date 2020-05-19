@@ -54,8 +54,8 @@ class QuestionViewController: UIViewController {
         
         //問題数と出題順の取得  sharedInstance.questionDataArray****　次の問題へ進むたびにここに戻って画面表示をする
         let totalNumberOfQuestions = QuestionDataManager.sharedInstance.questionDataArray.count//問題の総数
-        var nowQuestionNo = questionData.questionNo //現在の出題順　
-print("QuestionView冒頭_questionData.questionNo:\(questionData.questionNo)")//０になってる？？？？？
+        var nowQuestionNo = questionData.questionNo //現在の出題順
+        
         //再開用フラグを使用して、保存した値を使うかどうか判断する
         let defaults = UserDefaults.standard      //UserDefaultsを参照する
         var restartFlag = defaults.bool(forKey: "restartFlag") //再開用フラグを読み込む
@@ -192,6 +192,7 @@ print("QuestionView冒頭_questionData.questionNo:\(questionData.questionNo)")//
             }
     }
     // end of func goNextQuestion() ------------------------------------------------
+ 
     
     //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     //中断する　ボタンを押した時
@@ -241,7 +242,6 @@ print("QuestionView冒頭_questionData.questionNo:\(questionData.questionNo)")//
         defaults.set(restartFlag, forKey: "restartFlag") //再開フラグをtrueを"restartFlag"の名で保存する
         defaults.set(correctCount, forKey: "correctCount") //正解数を"correctCount"の名で保存する
         defaults.set(questionData.questionNo, forKey: "nowQuestionNo")//次の問題の出題順を"nowQuestionNo"の名で保存する
-print("中断ボタン後questionData.questionNo:\(questionData.questionNo)")//２回めの再開時に０になる？？？？？？？
         
     //スタート画面に戻る　StartViewControllerへ
     //StoryboardのIdentifierに設定した値("start")を使って、ViewControllerを生成する
