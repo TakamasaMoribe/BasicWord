@@ -126,6 +126,7 @@ class QuestionDataManager {
     //次の問題文の取り出し-----------------------------------------------------------------------
     func nextQuestion() -> QuestionData? {
         if nowQuestionIndex < questionDataArray.count { //問題に残りがある時
+
             let nextQuestion = questionDataArray[nowQuestionIndex]
             nowQuestionIndex += 1
             return nextQuestion //次の問題へ
