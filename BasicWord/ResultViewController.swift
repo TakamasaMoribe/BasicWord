@@ -76,9 +76,11 @@ class ResultViewController: UIViewController {
         //１回分の履歴文字列をつくり、改行を追加する
         nowResult = timeData + "    " + filename + "    " + correctRate + "\n" //改行
                 // "05/19 12:00   １年生物   100%" 11+3+8+3+4 = 29
+        
+        //過去の履歴をファイルから読み込んで、今回の履歴に追加してから保存する。
+        historyData = saveHistory(nowResult:nowResult) //saveHistory()メソッド
         //履歴をテキストビューに表示
-        historyData = saveHistory(nowResult:nowResult) //過去の履歴を追加して保存する
-        historyTextView.text = historyData //全部の履歴の表示
+        historyTextView.text = historyData //全部の履歴を表示する
 
     }
     // end of  func showHistory()  ----------------------------------------------------
@@ -131,7 +133,7 @@ class ResultViewController: UIViewController {
     // end of  saveHistory(nowResult:String)  --------------------------------------
 
     
-    //履歴の回数を制限する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //履歴の回数を制限する　文字列の長さを制限する　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
     func historyLimit(text:String) -> String {
         //１回分の履歴文字列の長さ（文字数）は３０なので、それを使う
         var limitedText:String = "" //制限した長さの文字列として返す
