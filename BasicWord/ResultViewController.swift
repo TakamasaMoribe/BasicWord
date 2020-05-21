@@ -57,8 +57,11 @@ class ResultViewController: UIViewController {
             var timeStr:String   //時刻を取り出す文字列
             var timeValue:Int    //時刻を示す数値
             timeStr = String(timeData.suffix(5)) //後ろから５文字取り出す（何時：何分）
-            timeStr = String(timeStr.prefix(2))  //さらにそのうち、前から２文字（何時）
-            timeValue = Int(timeStr)!            //数値にして比較する
+            timeStr = String(timeStr.prefix(2))//さらにそのうち、前から２文字（何時）
+                if String(timeStr.prefix(1)) == " " {//１桁の時刻の時、１桁目が半角スペースになるので
+                    timeStr = String(timeStr.suffix(1)) //後ろから1文字取り出す
+                }
+            timeValue = Int(timeStr)! //数値にして比較する
                 if timeValue<10 {                //１０時よりも前の時刻
                     timeData = String(timeData.suffix(10)) //後ろから1０文字
                 }else{
